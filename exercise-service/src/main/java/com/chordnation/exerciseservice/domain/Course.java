@@ -1,10 +1,7 @@
 package com.chordnation.exerciseservice.domain;
 
 import com.chordnation.exerciseservice.domain.enums.Level;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Course {
