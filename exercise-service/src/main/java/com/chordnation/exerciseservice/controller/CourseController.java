@@ -1,7 +1,7 @@
 package com.chordnation.exerciseservice.controller;
 
 
-import com.chordnation.exerciseservice.domain.Course;
+import com.chordnation.exerciseservice.domain.dto.CourseDTO;
 import com.chordnation.exerciseservice.service.CourseService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +17,17 @@ public class CourseController {
     }
 
     @GetMapping
-    public List<Course> getAllCourses(){
+    public List<CourseDTO> getAllCourses(){
         return courseService.getAllCourses();
     }
 
     @PostMapping
-    public void addCourse(@RequestBody Course course){
-        courseService.addCourse(course);
+    public void addCourse(@RequestBody CourseDTO courseDTO){
+        courseService.addCourse(courseDTO);
     }
 
-    @DeleteMapping
-    public void deleteCourse(@RequestBody Long id){
+    @DeleteMapping("/{id}")
+    public void deleteCourse(@PathVariable("id") Long id){
         courseService.deleteCourse(id);
     }
 }

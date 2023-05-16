@@ -1,6 +1,6 @@
 package com.chordnation.tabservice.controller;
 
-import com.chordnation.tabservice.domain.Tab;
+import com.chordnation.tabservice.domain.dto.TabDTO;
 import com.chordnation.tabservice.service.TabService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,17 +16,17 @@ public class TabController {
     }
 
     @GetMapping
-    public List<Tab> getAllTabs() {
+    public List<TabDTO> getAllTabs() {
         return tabService.getAllTabs();
     }
 
     @PostMapping
-    public void addTab(@RequestBody Tab tab) {
-        tabService.addTab(tab);
+    public void addTab(@RequestBody TabDTO tabDTO) {
+        tabService.addTab(tabDTO);
     }
 
-    @DeleteMapping
-    public void deleteTab(@RequestBody Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteTab(@PathVariable("id") Long id) {
         tabService.deleteTab(id);
     }
 }

@@ -1,7 +1,7 @@
 package com.chordnation.tabservice.controller;
 
 
-import com.chordnation.tabservice.domain.Song;
+import com.chordnation.tabservice.domain.dto.SongDTO;
 import com.chordnation.tabservice.service.SongService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +17,17 @@ public class SongController {
     }
 
     @GetMapping
-    public List<Song> getAllSongs() {
+    public List<SongDTO> getAllSongs() {
         return songService.getAllSongs();
     }
 
     @PostMapping
-    public void addSong(@RequestBody Song song) {
-        songService.addSong(song);
+    public void addSong(@RequestBody SongDTO songDTO) {
+        songService.addSong(songDTO);
     }
 
-    @DeleteMapping
-    public void deleteSong(@RequestBody Long id) {
+    @DeleteMapping("/{id}")
+    public void deleteSong(@PathVariable("id") Long id) {
         songService.deleteSong(id);
     }
 }
