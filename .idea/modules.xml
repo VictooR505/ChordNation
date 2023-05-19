@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/exercise-service/exercise-service.iml" filepath="$PROJECT_DIR$/exercise-service/exercise-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/tab-service/tab-service.iml" filepath="$PROJECT_DIR$/tab-service/tab-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
     </modules>
   </component>
 </project>
