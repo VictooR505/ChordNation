@@ -9,7 +9,7 @@ public class User {
     private Long id;
     private String name;
     private String email;
-    @OneToOne
+    @Embedded
     private UserDetails userDetails;
 
     public User(Long id, String name, String email, UserDetails userDetails) {

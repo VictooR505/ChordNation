@@ -6,11 +6,8 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
+@Embeddable
 public class UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private Level level;
     private GuitarType guitarType;
     @ElementCollection
@@ -18,8 +15,7 @@ public class UserDetails {
     @ElementCollection
     private List<String> favouriteArtists;
 
-    public UserDetails(Long id, Level level, GuitarType guitarType, List<String> favouriteGenres, List<String> favouriteArtists) {
-        this.id = id;
+    public UserDetails(Level level, GuitarType guitarType, List<String> favouriteGenres, List<String> favouriteArtists) {
         this.level = level;
         this.guitarType = guitarType;
         this.favouriteGenres = favouriteGenres;
@@ -27,14 +23,6 @@ public class UserDetails {
     }
 
     public UserDetails() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Level getLevel() {
