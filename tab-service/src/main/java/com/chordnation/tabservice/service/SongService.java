@@ -21,6 +21,10 @@ public class SongService {
         return songRepository.findAll().stream().map(songMapper::toDTO).toList();
     }
 
+    public List<SongDTO> getSongsWithFilters(List<String> artists, List<String> genres){
+        return songRepository.findAllByArtistsAndGenres(artists, genres).stream().map(songMapper::toDTO).toList();
+    }
+
     public void addSong(SongDTO songDTO) {
         songRepository.save(songMapper.toEntity(songDTO));
     }

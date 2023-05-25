@@ -1,5 +1,6 @@
 package com.chordnation.userservice.controller;
 
+import com.chordnation.userservice.domain.dto.SongDTO;
 import com.chordnation.userservice.domain.dto.UserDTO;
 import com.chordnation.userservice.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,11 @@ public class UserController {
     @GetMapping
     public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/{id}/suggestedSongs")
+    public List<SongDTO> getSongs(@PathVariable("id") Long id){
+        return userService.getSongs(id);
     }
 
     @PostMapping

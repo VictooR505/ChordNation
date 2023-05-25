@@ -12,7 +12,7 @@ public class Song {
     private String artist;
     private String name;
     private String genre;
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private List<Tab> tabs;
 
     public Song(Long id, String artist, String name, String genre, List<Tab> tabs) {

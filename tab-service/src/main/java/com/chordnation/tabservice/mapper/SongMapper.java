@@ -11,8 +11,8 @@ public class SongMapper {
     public SongDTO toDTO(Song song){
         SongDTO songDTO = new SongDTO(
                 song.getId(),
-                song.getName(),
                 song.getArtist(),
+                song.getName(),
                 song.getGenre(),
                 song.getTabs()
         );
@@ -22,8 +22,8 @@ public class SongMapper {
     public Song toEntity(SongDTO songDTO){
         Song song = new Song(
                 songDTO.id(),
-                songDTO.name(),
                 songDTO.artist(),
+                songDTO.name(),
                 songDTO.genre(),
                 songDTO.tabs()
         );

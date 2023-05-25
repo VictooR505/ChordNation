@@ -21,6 +21,12 @@ public class SongController {
         return songService.getAllSongs();
     }
 
+    @GetMapping("/filter")
+    public List<SongDTO> getSongsWithFilters(@RequestParam(required = false) List<String> artist,
+                                             @RequestParam(required = false) List<String> genre){
+        return songService.getSongsWithFilters(artist, genre);
+    }
+
     @PostMapping
     public void addSong(@RequestBody SongDTO songDTO) {
         songService.addSong(songDTO);
