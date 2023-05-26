@@ -1,6 +1,10 @@
 package com.chordnation.tabservice.service;
 
 import com.chordnation.tabservice.domain.dto.SongDTO;
+import com.chordnation.tabservice.domain.enums.GuitarType;
+import com.chordnation.tabservice.domain.enums.Level;
+import com.chordnation.tabservice.domain.enums.TabType;
+import com.chordnation.tabservice.domain.enums.Tuning;
 import com.chordnation.tabservice.mapper.SongMapper;
 import com.chordnation.tabservice.repository.SongRepository;
 import org.springframework.stereotype.Service;
@@ -21,8 +25,15 @@ public class SongService {
         return songRepository.findAll().stream().map(songMapper::toDTO).toList();
     }
 
-    public List<SongDTO> getSongsWithFilters(List<String> artists, List<String> genres){
-        return songRepository.findAllByArtistsAndGenres(artists, genres).stream().map(songMapper::toDTO).toList();
+    public List<SongDTO> getSongsWithFilters(List<String> artist, List<String> genre, List<Level> level, List<TabType> tabType,
+                                             List<GuitarType> guitarType, List<Tuning> tuning){
+        artist = artist.isEmpty() ? songRepository.getAllArtists() : artist;
+        genre = genre.isEmpty() ? songRepository.getAllGenres() : genre;
+        level = level.isEmpty() ? List.of(Level.values()) : level;
+        tabType = tabType.isEmpty() ? List.of(TabType.values()) : tabType;
+        guitarType = guitarType.isEmpty() ? List.of(GuitarType.values()) : guitarType;
+        tuning = tuning.isEmpty() ? List.of(Tuning.values()) : tuning;
+        return songRepository.findAllWithFilters(artist, genre, level, tabType, guitarType, tuning).stream().map(songMapper::toDTO).toList();
     }
 
     public void addSong(SongDTO songDTO) {
@@ -32,4 +43,5 @@ public class SongService {
     public void deleteSong(Long id) {
         songRepository.deleteById(id);
     }
+
 }

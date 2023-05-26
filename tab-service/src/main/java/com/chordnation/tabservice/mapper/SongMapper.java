@@ -4,7 +4,7 @@ import com.chordnation.tabservice.domain.Song;
 import com.chordnation.tabservice.domain.dto.SongDTO;
 
 public class SongMapper {
-    public final TabMapper tabMapper;
+    private final TabMapper tabMapper;
     public SongMapper() {
         this.tabMapper = new TabMapper();
     }

@@ -30,7 +30,7 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         return tabFeignClient.getSongs(user.getUserDetails().getFavouriteArtists(),
                 user.getUserDetails().getFavouriteGenres());
-    }
+    }//TODO: inne query w songrepo specjalnie do tej metody z uzyciem OR dla artist i genre oraz AND dla level i guitartype
 
     public void addUser(UserDTO userDTO){
         userRepository.save(userMapper.toEntity(userDTO));

@@ -10,7 +10,7 @@ public class TabMapper {
 
     public TabDTO toDTO(Tab tab){
         TabDTO tabDTO = new TabDTO(
-                tab.getId(),
+                tab.getVersion(),
                 tab.getLevel(),
                 tab.getTabType(),
                 tab.getGuitarType(),
@@ -23,7 +23,7 @@ public class TabMapper {
 
     public Tab toEntity(TabDTO tabDTO){
         Tab tab = new Tab(
-                tabDTO.id(),
+                tabDTO.version(),
                 tabDTO.level(),
                 tabDTO.tabType(),
                 tabDTO.guitarType(),

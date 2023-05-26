@@ -12,7 +12,8 @@ public class Song {
     private String artist;
     private String name;
     private String genre;
-    @OneToMany(mappedBy = "id")
+    @ElementCollection
+    @CollectionTable(joinColumns = @JoinColumn(name = "song_id"))
     private List<Tab> tabs;
 
     public Song(Long id, String artist, String name, String genre, List<Tab> tabs) {

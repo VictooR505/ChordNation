@@ -2,6 +2,10 @@ package com.chordnation.tabservice.controller;
 
 
 import com.chordnation.tabservice.domain.dto.SongDTO;
+import com.chordnation.tabservice.domain.enums.GuitarType;
+import com.chordnation.tabservice.domain.enums.Level;
+import com.chordnation.tabservice.domain.enums.TabType;
+import com.chordnation.tabservice.domain.enums.Tuning;
 import com.chordnation.tabservice.service.SongService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +26,14 @@ public class SongController {
     }
 
     @GetMapping("/filter")
-    public List<SongDTO> getSongsWithFilters(@RequestParam(required = false) List<String> artist,
-                                             @RequestParam(required = false) List<String> genre){
-        return songService.getSongsWithFilters(artist, genre);
+    public List<SongDTO> getSongsWithFilters(@RequestParam(required = false, defaultValue = "") List<String> artist,
+                                             @RequestParam(required = false, defaultValue = "") List<String> genre,
+                                             @RequestParam(required = false, defaultValue = "") List<Level> level,
+                                             @RequestParam(required = false, defaultValue = "") List<TabType> tabType,
+                                             @RequestParam(required = false, defaultValue = "") List<GuitarType> guitarType,
+                                             @RequestParam(required = false, defaultValue = "") List<Tuning> tuning
+                                             ){
+        return songService.getSongsWithFilters(artist, genre, level ,tabType, guitarType, tuning);
     }
 
     @PostMapping

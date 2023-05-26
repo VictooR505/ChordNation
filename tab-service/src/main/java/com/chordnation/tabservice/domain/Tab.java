@@ -6,11 +6,9 @@ import com.chordnation.tabservice.domain.enums.TabType;
 import com.chordnation.tabservice.domain.enums.Tuning;
 import jakarta.persistence.*;
 
-@Entity
+@Embeddable
 public class Tab {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long version;
     private Level level;
     private TabType tabType;
     private GuitarType guitarType;
@@ -18,8 +16,8 @@ public class Tab {
     private int rate;
     private String url;
 
-    public Tab(Long id, Level level, TabType tabType, GuitarType guitarType, Tuning tuning, int rate, String url) {
-        this.id = id;
+    public Tab(Long version, Level level, TabType tabType, GuitarType guitarType, Tuning tuning, int rate, String url) {
+        this.version = version;
         this.level = level;
         this.tabType = tabType;
         this.guitarType = guitarType;
@@ -31,12 +29,12 @@ public class Tab {
     public Tab() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getVersion() {
+        return version;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public Level getLevel() {
