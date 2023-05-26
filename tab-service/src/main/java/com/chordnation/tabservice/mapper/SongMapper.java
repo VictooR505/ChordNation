@@ -4,8 +4,9 @@ import com.chordnation.tabservice.domain.Song;
 import com.chordnation.tabservice.domain.dto.SongDTO;
 
 public class SongMapper {
-
+    public final TabMapper tabMapper;
     public SongMapper() {
+        this.tabMapper = new TabMapper();
     }
 
     public SongDTO toDTO(Song song){
@@ -14,7 +15,7 @@ public class SongMapper {
                 song.getArtist(),
                 song.getName(),
                 song.getGenre(),
-                song.getTabs()
+                song.getTabs().stream().map(tabMapper::toDTO).toList()
         );
         return songDTO;
     }
@@ -25,7 +26,7 @@ public class SongMapper {
                 songDTO.artist(),
                 songDTO.name(),
                 songDTO.genre(),
-                songDTO.tabs()
+                songDTO.tabs().stream().map(tabMapper::toEntity).toList()
         );
         return song;
     }
