@@ -45,4 +45,12 @@ public class SongController {
     public void deleteSong(@PathVariable("id") Long id) {
         songService.deleteSong(id);
     }
+
+    @GetMapping("/suggested")
+    public List<SongDTO> findAllSuggestedForUser(@RequestParam(required = false, defaultValue = "") List<String> artist,
+                                                 @RequestParam(required = false, defaultValue = "") List<String> genres,
+                                                 @RequestParam Level level,
+                                                 @RequestParam GuitarType guitarType){
+        return songService.findAllSuggestedForUser(artist, genres, level, guitarType);
+    }
 }

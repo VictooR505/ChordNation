@@ -44,4 +44,8 @@ public class SongService {
         songRepository.deleteById(id);
     }
 
+    public List<SongDTO> findAllSuggestedForUser(List<String> artist, List<String> genres, Level level, GuitarType guitarType){
+        return songRepository.findAllSuggestedForUser(artist, genres, level, guitarType).stream().map(songMapper::toDTO).toList();
+    }
+
 }
