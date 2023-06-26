@@ -1,4 +1,6 @@
 package com.chordnation.userservice.domain.dto;
 
-public record UserDTO(Long id, String name, String email, UserDetailsDTO userDetails) {
+import jakarta.validation.constraints.Email;
+
+public record UserDTO(Long id, String name, @Email String email, UserDetailsDTO userDetails) {
 }

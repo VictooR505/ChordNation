@@ -3,6 +3,7 @@ package com.chordnation.userservice.controller;
 import com.chordnation.userservice.domain.dto.SongDTO;
 import com.chordnation.userservice.domain.dto.UserDTO;
 import com.chordnation.userservice.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@RequestBody UserDTO userDTO){
+    public void addUser(@Valid @RequestBody UserDTO userDTO){
         userService.addUser(userDTO);
     }
 

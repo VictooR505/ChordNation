@@ -5,6 +5,8 @@ import com.chordnation.tabservice.domain.enums.Level;
 import com.chordnation.tabservice.domain.enums.TabType;
 import com.chordnation.tabservice.domain.enums.Tuning;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Embeddable
 public class Tab {
@@ -13,6 +15,8 @@ public class Tab {
     private TabType tabType;
     private GuitarType guitarType;
     private Tuning tuning;
+    @Min(0)
+    @Max(5)
     private int rate;
     private String url;
 

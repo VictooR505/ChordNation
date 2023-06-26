@@ -7,6 +7,7 @@ import com.chordnation.tabservice.domain.enums.Level;
 import com.chordnation.tabservice.domain.enums.TabType;
 import com.chordnation.tabservice.domain.enums.Tuning;
 import com.chordnation.tabservice.service.SongService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class SongController {
     }
 
     @PostMapping
-    public void addSong(@RequestBody SongDTO songDTO) {
+    public void addSong(@Valid @RequestBody SongDTO songDTO) {
         songService.addSong(songDTO);
     }
 
