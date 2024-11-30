@@ -1,9 +1,6 @@
 package com.chordnation.chordnation.exercise;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +27,24 @@ public class ExerciseController {
     @GetMapping("/{id}")
     public Exercise getExerciseById(@PathVariable Long id){
         return exerciseService.findExerciseById(id);
+    }
+
+    @PatchMapping("/do/{id}")
+    public void doExercise(@PathVariable Long id,
+                           @RequestBody Long userId,
+                           @RequestBody int level){
+        exerciseService.doExercise(userId, id, level);
+    }
+
+    @PatchMapping("/{exerciseId}/songs/add/{userId}")
+    public void addToFavourites(@PathVariable Long userId,
+                                @PathVariable Long exerciseId){
+        exerciseService.addToFavourites(userId, exerciseId);
+    }
+
+    @PatchMapping("/{exerciseId}/songs/remove/{userId}")
+    public void removeFromFavourites(@PathVariable Long userId,
+                                @PathVariable Long exerciseId){
+        exerciseService.removeFromFavourites(userId, exerciseId);
     }
 }

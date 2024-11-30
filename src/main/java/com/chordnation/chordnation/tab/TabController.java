@@ -2,7 +2,6 @@ package com.chordnation.chordnation.tab;
 
 
 import com.chordnation.chordnation.enums.Level;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,15 +29,32 @@ public class TabController {
                                      @RequestParam(required = false, defaultValue = "id") String sortBy,
                                      @RequestParam(required = false,  defaultValue = "ASC") String sortOrder){
         List<Level> levelList = new ArrayList<>();
-        for (int i=0;i<levels.size();i++){
-            levelList.add(Level.valueOf(levels.get(i)));
+        for (String level : levels) {
+            levelList.add(Level.valueOf(level));
         }
         return tabService.getAllSongs(levelList, genres, name, sortBy, sortOrder);
+    }
+
+    @PatchMapping("/{songId}/songs/add/{userId}")
+    public void addToFavourites(@PathVariable Long userId,
+                                @PathVariable Long songId){
+        tabService.addToFavourites(userId, songId);
+    }
+
+    @PatchMapping("/{songId}/songs/remove/{userId}")
+    public void removeFromFavourites(@PathVariable Long userId,
+                                     @PathVariable Long songId){
+        tabService.removeFromFavourites(userId, songId);
     }
 
     @GetMapping("/genres")
     public List<String> getGenres(){
         return tabService.getGenres();
+    }
+
+    @GetMapping("/artists")
+    public List<String> getArtists(){
+        return tabService.getArtists();
     }
 
     @PatchMapping("/rate/{id}")
@@ -47,8 +63,13 @@ public class TabController {
         tabService.rateTab(id, rate);
     }
 
-   // @GetMapping("/{id}")
+    @PatchMapping("/play/{id}")
+    public void playSong(@PathVariable Long id,
+                           @RequestBody Long userId) {
+        tabService.playSong(id, userId);
+    }
 
-  //  @GetMapping("/song/{id}")
+
+
 
 }

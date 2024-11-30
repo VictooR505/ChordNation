@@ -1,13 +1,14 @@
 package com.chordnation.chordnation.exercise;
 
 import com.chordnation.chordnation.enums.Level;
+import com.chordnation.chordnation.user.ExercisesDone;
 import com.chordnation.chordnation.user.User;
 import com.chordnation.chordnation.user.UserDetails;
 import com.chordnation.chordnation.user.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ExerciseService {
@@ -38,17 +39,18 @@ public class ExerciseService {
     public void doExercise(Long userId, Long exerciseId, int level){
         User user = userRepository.findById(userId).get();
         UserDetails userDetails = user.getUserDetails();
-        Map<Long, Integer> exercisesDone = userDetails.getExercisesDone();
-        exercisesDone.put(exerciseId, level);
+        List<ExercisesDone> exercisesDone = userDetails.getExercisesDone();
+        ExercisesDone exercise = new ExercisesDone(exerciseId, LocalDateTime.now(), level);
+        exercisesDone.add(exercise);
         userDetails.setExercisesDone(exercisesDone);
         userRepository.save(user);
-        addPoints(userId, exerciseId);
+        addPoints(userId, exerciseId, level);
     }
 
-    public void addPoints(Long userId, Long exerciseId){
+    public void addPoints(Long userId, Long exerciseId, int level){
         Exercise exercise = exerciseRepository.findById(exerciseId).get();
         User user = userRepository.findById(userId).get();
-        user.getUserDetails().setPoints(user.getUserDetails().getPoints()+exercise.getPoints());
+        user.getUserDetails().setPoints(user.getUserDetails().getPoints()+exercise.getPoints()*(level+1));
         userRepository.save(user);
         if(user.getUserDetails().getLevel()!=Level.MASTER){
             calculateLevel(userId); //nie ma sensu sprawdzac przy maks poziomie
@@ -68,6 +70,22 @@ public class ExerciseService {
             user.getUserDetails().setLevel(Level.MASTER);
         }
         //przykladowe wartosci,do zmiany
+    }
+
+    public void addToFavourites(Long userId, Long exerciseId){
+        User user = userRepository.findById(userId).get();
+        List<Long> exercises = user.getUserDetails().getFavoriteExercises();
+        exercises.add(exerciseId);
+        user.getUserDetails().setFavoriteExercises(exercises);
+        userRepository.save(user);
+    }
+
+    public void removeFromFavourites(Long userId, Long exerciseId){
+        User user = userRepository.findById(userId).get();
+        List<Long> exercises = user.getUserDetails().getFavoriteExercises();
+        exercises.remove(exerciseId);
+        user.getUserDetails().setFavoriteExercises(exercises);
+        userRepository.save(user);
     }
 
 

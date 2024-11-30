@@ -1,10 +1,9 @@
 package com.chordnation.chordnation.tab;
 
-import com.chordnation.chordnation.enums.GuitarType;
-import com.chordnation.chordnation.enums.Level;
-import com.chordnation.chordnation.enums.TabType;
-import com.chordnation.chordnation.enums.Tuning;
+import com.chordnation.chordnation.enums.*;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Tab {
@@ -19,11 +18,13 @@ public class Tab {
     private TabType tabType;
     private GuitarType guitarType;
     private Tuning tuning;
+    @ElementCollection
+    private List<KeyWord> keyWords;
     private double rate;
     private double rateNumber;
     private String url;
 
-    public Tab(Long id, Song song,/* Long version,*/ Level level, TabType tabType, GuitarType guitarType, Tuning tuning, double rate, double rateNumber, String url) {
+    public Tab(Long id, Song song,/* Long version,*/ Level level, TabType tabType, GuitarType guitarType, Tuning tuning, List<KeyWord> keyWords, double rate, double rateNumber, String url) {
         this.id = id;
         this.song = song;
     //    this.version = version;
@@ -31,6 +32,7 @@ public class Tab {
         this.tabType = tabType;
         this.guitarType = guitarType;
         this.tuning = tuning;
+        this.keyWords = keyWords;
         this.rate = rate;
         this.rateNumber = rateNumber;
         this.url = url;
@@ -85,6 +87,14 @@ public class Tab {
 
     public void setTuning(Tuning tuning) {
         this.tuning = tuning;
+    }
+
+    public List<KeyWord> getKeyWords() {
+        return keyWords;
+    }
+
+    public void setKeyWords(List<KeyWord> keyWords) {
+        this.keyWords = keyWords;
     }
 
     public double getRate() {

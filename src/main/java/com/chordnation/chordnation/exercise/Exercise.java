@@ -1,7 +1,10 @@
 package com.chordnation.chordnation.exercise;
 
+import com.chordnation.chordnation.enums.KeyWord;
 import com.chordnation.chordnation.enums.Level;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Exercise {
@@ -18,9 +21,11 @@ public class Exercise {
     private String audioUrl;
     private int points;
     private int requiredPoints;
+    @ElementCollection
+    private List<KeyWord> keyWords;
     //5 sekcji + 5/6 cw na kazda sekcji
 
-    public Exercise(Long id, Section section, Level level, String name, String approxDuration, String description, String audioUrl, int points, int requiredPoints) {
+    public Exercise(Long id, Section section, Level level, String name, String approxDuration, String description, String audioUrl, int points, int requiredPoints, List<KeyWord> keyWords) {
         this.id = id;
         this.section = section;
         this.level = level;
@@ -30,6 +35,7 @@ public class Exercise {
         this.audioUrl = audioUrl;
         this.points = points;
         this.requiredPoints = requiredPoints;
+        this.keyWords = keyWords;
     }
 
     public Exercise() {
@@ -105,5 +111,13 @@ public class Exercise {
 
     public void setRequiredPoints(int requiredPoints) {
         this.requiredPoints = requiredPoints;
+    }
+
+    public List<KeyWord> getKeyWords() {
+        return keyWords;
+    }
+
+    public void setKeyWords(List<KeyWord> keyWords) {
+        this.keyWords = keyWords;
     }
 }

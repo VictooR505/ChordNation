@@ -1,9 +1,6 @@
 package com.chordnation.chordnation.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,22 @@ public class UserController {
     public User getUserById(@PathVariable Long id){
         return userService.findUserById(id);
     }
+
+    @PatchMapping("/{id}/preferences")
+    public void updatePreferences(@PathVariable Long id,
+                                  @RequestBody UserPreferencesDTO preferences){
+        userService.updatePreferences(id, preferences);
+    }
+
+    @GetMapping("/{id}/preferences")
+    public UserPreferencesDTO getPreferences(@PathVariable Long id){
+            return userService.getPreferences(id);
+    }
+
+    @GetMapping("/{id}/favorites")
+    public FavoritesDTO getFavorites(@PathVariable Long id){
+        return userService.getFavorites(id);
+    }
+
 
 }

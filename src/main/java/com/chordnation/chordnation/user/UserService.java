@@ -1,5 +1,6 @@
 package com.chordnation.chordnation.user;
 
+import com.chordnation.chordnation.tab.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,9 +9,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final TabRepository tabRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, TabRepository tabRepository) {
         this.userRepository = userRepository;
+        this.tabRepository = tabRepository;
     }
 
     public List<User> findAllUsers(){
@@ -19,6 +22,39 @@ public class UserService {
 
     public User findUserById(Long id){
         return userRepository.findById(id).get();
+    }
+
+    public void updatePreferences(Long id, UserPreferencesDTO preferences){
+        User user = userRepository.findById(id).get();
+        user.getUserDetails().setFavouriteArtists(preferences.artists());
+        user.getUserDetails().setFavouriteGenres(preferences.genres());
+        user.getUserDetails().setKeyWords(preferences.keyWords());
+        userRepository.save(user);
+    }
+
+    public UserPreferencesDTO getPreferences(Long id){
+        User user = findUserById(id);
+        return new UserPreferencesDTO(user.getUserDetails().getFavouriteArtists(),
+                user.getUserDetails().getFavouriteGenres(), user.getUserDetails().getKeyWords());
+    }
+
+    public FavoritesDTO getFavorites(Long id){
+        User user = findUserById(id);
+        return new FavoritesDTO(user.getUserDetails().getFavoriteSongs(),
+                user.getUserDetails().getFavoriteExercises());
+    }
+
+    public List<SongDTO> getSuggestedSongs(Long id){
+        User user = findUserById(id);
+        List<Tab> songs = tabRepository.findAllSuggested(user.getUserDetails().getFavouriteGenres(), List.of(user.getUserDetails().getLevel()),
+                user.getUserDetails().getFavouriteArtists(), user.getUserDetails().getKeyWords());
+        List<Long> songsPlayed = user.getUserDetails().getSongsPlayed().stream().map(SongsPlayed::getSongId).toList();
+        for(int i=0; i<songs.size(); i++){
+            if(songsPlayed.contains(songs.get(i).getSong().getId())){
+                songs.remove(i);
+            }
+        }
+        return songs.stream().map(TabMapper::mapToSongDTO).toList();
     }
 
 }
