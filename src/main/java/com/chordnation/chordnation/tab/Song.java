@@ -2,6 +2,8 @@ package com.chordnation.chordnation.tab;
 
 import com.chordnation.chordnation.enums.Genre;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,6 +15,7 @@ public class Song {
     private Long id;
     private String artist;
     private String name;
+    @Enumerated(EnumType.STRING)
     private Genre genre; //zamien na enumy
     private String imageUrl;
 
