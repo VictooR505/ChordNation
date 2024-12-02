@@ -14,8 +14,8 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 /*    @Query("SELECT s FROM Song s LEFT JOIN s.tabs t WHERE (s.genre IN (:genres)) AND (t.level IN (:levels))")
     List<Song> findAll(List<String> genres, List<Level> levels);*/
 
-    @Query("SELECT DISTINCT s.genre FROM Song s")
-    List<String> getAllGenres();
+/*    @Query("SELECT DISTINCT s.genre FROM Song s")
+    List<String> getAllGenres();*/
 
     @Query("SELECT DISTINCT s.artist FROM Song s")
     List<String> getAllArtists();

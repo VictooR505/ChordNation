@@ -1,5 +1,6 @@
 package com.chordnation.chordnation.tab;
 
+import com.chordnation.chordnation.enums.Genre;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,14 +13,16 @@ public class Song {
     private Long id;
     private String artist;
     private String name;
-    private String genre;
+    private Genre genre; //zamien na enumy
+    private String imageUrl;
 
 
-    public Song(Long id, String artist, String name, String genre) {
+    public Song(Long id, String artist, String name, Genre genre, String imageUrl) {
         this.id = id;
         this.artist = artist;
         this.name = name;
         this.genre = genre;
+        this.imageUrl = imageUrl;
     }
 
     public Song() {
@@ -49,11 +52,19 @@ public class Song {
         this.name = name;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

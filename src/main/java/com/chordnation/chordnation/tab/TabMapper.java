@@ -7,7 +7,7 @@ public class TabMapper {
                 tab.getSong().getName(),
                 tab.getSong().getGenre(),
                 tab.getLevel(),
-                tab.getUrl()
+                tab.getSong().getImageUrl()
         );
     }
 }

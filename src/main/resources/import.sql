@@ -1,4 +1,4 @@
-insert into exercise (id, category, level, name, description, audio_url, points) values (1, 0, 0, 'Chromatic - Exercise 1', 'Chromatic basics', 'url', 20);
+insert into exercise (id, level, name, description, audio_url, points, required_points) values (1, 0, 'Chromatic - Exercise 1', 'Chromatic basics', 'url', 20, 0);
 
 insert into song (artist, genre, name, id) values ('Metallica', 'Metal', 'Orion', 1);
 insert into song (artist, genre, name, id) values ('Nirvana', 'Grunge', 'Polly', 2);

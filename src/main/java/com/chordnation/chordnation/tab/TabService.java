@@ -1,5 +1,6 @@
 package com.chordnation.chordnation.tab;
 
+import com.chordnation.chordnation.enums.Genre;
 import com.chordnation.chordnation.enums.Level;
 import com.chordnation.chordnation.user.*;
 import org.springframework.data.domain.Sort;
@@ -23,21 +24,14 @@ public class TabService {
         this.userRepository = userRepository;
     }
 
-    public List<Tab> findAll(){
-        return tabRepository.findAll();
+    public List<Tab> getTabsBySong(Long id){
+        Song song = songRepository.findById(id).get();
+        return tabRepository.findAllBySong(song);
     }
 
-    public Tab findById(Long id){
-        return tabRepository.findById(id).get();
-    }
-
-    public Song getSong(Long id){
-        return songRepository.findById(id).get();
-    }
-
-    public List<SongDTO> getAllSongs(List<Level> level, List<String> genre, String fullName, String sortBy, String sortOrder){
+    public List<SongDTO> getAllSongs(List<Level> level, List<Genre> genre, String fullName, String sortBy, String sortOrder){
         level = level.isEmpty() ? List.of(Level.values()) : level;
-        genre = genre.isEmpty() ? songRepository.getAllGenres() : genre;
+        genre = genre.isEmpty() ? List.of(Genre.values()) : genre;
 
         if(fullName.isEmpty()){
             tabRepository.findAll(genre, level, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy)).stream().map(TabMapper::mapToSongDTO).toList();
@@ -83,8 +77,8 @@ public class TabService {
         userRepository.save(user);
     }
 
-    public List<String> getGenres(){
-        return songRepository.getAllGenres();
+    public List<Genre> getGenres(){
+        return List.of(Genre.values());
     }
 
     public List<String> getArtists(){

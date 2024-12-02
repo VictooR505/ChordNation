@@ -1,5 +1,6 @@
 package com.chordnation.chordnation.user;
 
+import com.chordnation.chordnation.enums.Genre;
 import com.chordnation.chordnation.enums.GuitarType;
 import com.chordnation.chordnation.enums.KeyWord;
 import com.chordnation.chordnation.enums.Level;
@@ -13,7 +14,7 @@ public class UserDetails {
     private Level level;
     private GuitarType guitarType;
     @ElementCollection
-    private List<String> favouriteGenres;
+    private List<Genre> favouriteGenres;
     @ElementCollection
     private List<String> favouriteArtists;
     @ElementCollection
@@ -28,7 +29,7 @@ public class UserDetails {
     @ElementCollection
     private List<KeyWord> keyWords;
 
-    public UserDetails(Level level, GuitarType guitarType, List<String> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords) {
+    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords) {
         this.level = level;
         this.guitarType = guitarType;
         this.favouriteGenres = favouriteGenres;
@@ -58,11 +59,11 @@ public class UserDetails {
         this.guitarType = guitarType;
     }
 
-    public List<String> getFavouriteGenres() {
+    public List<Genre> getFavouriteGenres() {
         return favouriteGenres;
     }
 
-    public void setFavouriteGenres(List<String> favouriteGenres) {
+    public void setFavouriteGenres(List<Genre> favouriteGenres) {
         this.favouriteGenres = favouriteGenres;
     }
 
