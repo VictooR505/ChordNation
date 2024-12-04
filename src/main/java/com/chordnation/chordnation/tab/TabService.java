@@ -29,6 +29,11 @@ public class TabService {
         return tabRepository.findAllBySong(song);
     }
 
+    public SongDTO getSongById(Long id){
+        Tab tab = tabRepository.findById(id).get();
+        return TabMapper.mapToSongDTO(tab);
+    }
+
     public List<SongDTO> getAllSongs(List<Level> level, List<Genre> genre, String fullName, String sortBy, String sortOrder){
         level = level.isEmpty() ? List.of(Level.values()) : level;
         genre = genre.isEmpty() ? List.of(Genre.values()) : genre;
