@@ -34,12 +34,12 @@ public class TabService {
         genre = genre.isEmpty() ? List.of(Genre.values()) : genre;
 
         if(fullName.isEmpty()){
-            tabRepository.findAll(genre, level, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy)).stream().map(TabMapper::mapToSongDTO).toList();
+            tabRepository.findAll(genre, level, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy)).stream().map(TabMapper::mapToSongDTO).distinct().toList();
         }
         String artist = fullName;
         String name = fullName;
         return tabRepository.findAllWithName(genre, level, artist, name, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy))
-                .stream().map(TabMapper::mapToSongDTO).toList();
+                .stream().map(TabMapper::mapToSongDTO).distinct().toList();
     }
 
     public void rateTab(Long id, int rate){
