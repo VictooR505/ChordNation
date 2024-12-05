@@ -29,5 +29,6 @@ insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_n
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (12, 12, 3, 1, 0, 0, 0, 0, 'https://example.com/tab1');
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (13, 13, 2, 1, 0, 0, 0, 0, 'https://example.com/tab1');
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (14, 14, 1, 1, 0, 0, 0, 0, 'https://example.com/tab1');
+insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (15, 2, 1, 1, 0, 0, 0, 0, 'https://example.com/tab1');
 
 

@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 @Service
@@ -39,13 +43,13 @@ public class TabService {
         genre = genre.isEmpty() ? List.of(Genre.values()) : genre;
 
         if(fullName.isEmpty()){
-            tabRepository.findAll(genre, level, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy)).stream().map(TabMapper::mapToSongDTO).distinct().toList();
+            tabRepository.findAll(genre, level, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy)).stream().map(TabMapper::mapToSongDTO).filter(distinctByKey(SongDTO::id)).toList();
         }
         String artist = fullName;
         String name = fullName;
         return tabRepository.findAllWithName(genre, level, artist, name, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy))
-                .stream().map(TabMapper::mapToSongDTO).distinct().toList();
-    }
+                .stream().map(TabMapper::mapToSongDTO).filter(distinctByKey(SongDTO::id)).toList(); //do songdto dodaj wszystkie typy gitar z tabow i filtrowanie po tuningu
+    } //distincbysongkey
 
     public void rateTab(Long id, int rate){
         Tab tab = tabRepository.findById(id).get();
@@ -53,7 +57,7 @@ public class TabService {
         double currentRate = tab.getRate()*currentRateNumber;
         tab.setRateNumber(currentRateNumber + 1);
         tab.setRate((currentRate+rate)/(currentRateNumber+1));
-        tabRepository.save(tab);
+        tabRepository.save(tab); //sprawdzanie czy juz wczesniej ocenil,jak nie toaktualizacja
     }
 
     public void playSong(Long songId, Long userId){
@@ -88,5 +92,10 @@ public class TabService {
 
     public List<String> getArtists(){
         return songRepository.getAllArtists();
+    }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
     }
 }

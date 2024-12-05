@@ -4,6 +4,10 @@ import com.chordnation.chordnation.enums.*;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Entity
 public class Tab {
@@ -127,6 +131,11 @@ public class Tab {
 
     public void setSong(Song song) {
         this.song = song;
+    }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
     }
 
 }
