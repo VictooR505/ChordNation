@@ -8,7 +8,8 @@ public class TabMapper {
                 tab.getSong().getName(),
                 tab.getSong().getGenre(),
                 tab.getLevel(),
-                tab.getSong().getImageUrl()
+                tab.getSong().getImageUrl(),
+                tab.getGuitarType()
         );
     }
 }

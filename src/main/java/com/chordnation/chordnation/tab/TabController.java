@@ -2,6 +2,7 @@ package com.chordnation.chordnation.tab;
 
 
 import com.chordnation.chordnation.enums.Genre;
+import com.chordnation.chordnation.enums.GuitarType;
 import com.chordnation.chordnation.enums.Level;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,13 +33,14 @@ public class TabController {
     public List<SongDTO> getAllSongs(@RequestParam(required = false, defaultValue = "") List<Genre> genres,
                                      @RequestParam(required = false, defaultValue = "") List<String> levels,
                                      @RequestParam(required = false, defaultValue = "") String name,
+                                     @RequestParam(required = false, defaultValue = "") List<GuitarType> guitarTypes,
                                      @RequestParam(required = false, defaultValue = "id") String sortBy,
                                      @RequestParam(required = false,  defaultValue = "ASC") String sortOrder){
         List<Level> levelList = new ArrayList<>();
         for (String level : levels) {
             levelList.add(Level.valueOf(level));
         }
-        return tabService.getAllSongs(levelList, genres, name, sortBy, sortOrder);
+        return tabService.getAllSongs(levelList, genres, guitarTypes, name,  sortBy, sortOrder);
     }
 
     @PatchMapping("/{songId}/songs/add/{userId}")

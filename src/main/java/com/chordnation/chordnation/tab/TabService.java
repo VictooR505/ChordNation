@@ -1,6 +1,7 @@
 package com.chordnation.chordnation.tab;
 
 import com.chordnation.chordnation.enums.Genre;
+import com.chordnation.chordnation.enums.GuitarType;
 import com.chordnation.chordnation.enums.Level;
 import com.chordnation.chordnation.user.*;
 import org.springframework.data.domain.Sort;
@@ -38,18 +39,20 @@ public class TabService {
         return TabMapper.mapToSongDTO(tab);
     }
 
-    public List<SongDTO> getAllSongs(List<Level> level, List<Genre> genre, String fullName, String sortBy, String sortOrder){
+    public List<SongDTO> getAllSongs(List<Level> level, List<Genre> genre, List<GuitarType> guitarType, String fullName, String sortBy, String sortOrder){
         level = level.isEmpty() ? List.of(Level.values()) : level;
         genre = genre.isEmpty() ? List.of(Genre.values()) : genre;
+        guitarType = guitarType.isEmpty() ? List.of(GuitarType.values()) : guitarType;
+
 
         if(fullName.isEmpty()){
-            tabRepository.findAll(genre, level, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy)).stream().map(TabMapper::mapToSongDTO).filter(distinctByKey(SongDTO::id)).toList();
+            tabRepository.findAll(genre, level, guitarType, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy)).stream().map(TabMapper::mapToSongDTO).filter(distinctByKey(SongDTO::id)).toList();
         }
         String artist = fullName;
         String name = fullName;
-        return tabRepository.findAllWithName(genre, level, artist, name, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy))
+        return tabRepository.findAllWithName(genre, level, guitarType, artist, name, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy))
                 .stream().map(TabMapper::mapToSongDTO).filter(distinctByKey(SongDTO::id)).toList(); //do songdto dodaj wszystkie typy gitar z tabow i filtrowanie po tuningu
-    } //distincbysongkey
+    }
 
     public void rateTab(Long id, int rate){
         Tab tab = tabRepository.findById(id).get();
