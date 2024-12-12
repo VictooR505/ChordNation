@@ -8,6 +8,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 
 import java.util.List;
+import java.util.Map;
 
 @Embeddable
 public class UserDetails {
@@ -28,8 +29,10 @@ public class UserDetails {
     private List<SongsPlayed> songsPlayed;
     @ElementCollection
     private List<KeyWord> keyWords;
+    @ElementCollection
+    private Map<Long, Integer> ratedTabs;
 
-    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords) {
+    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords, Map<Long, Integer> ratedTabs) {
         this.level = level;
         this.guitarType = guitarType;
         this.favouriteGenres = favouriteGenres;
@@ -38,6 +41,7 @@ public class UserDetails {
         this.favoriteExercises = favoriteExercises;
         this.points = points;
         this.keyWords = keyWords;
+        this.ratedTabs = ratedTabs;
     }
 
     public UserDetails() {
@@ -121,5 +125,13 @@ public class UserDetails {
 
     public void setKeyWords(List<KeyWord> keyWords) {
         this.keyWords = keyWords;
+    }
+
+    public Map<Long, Integer> getRatedTabs() {
+        return ratedTabs;
+    }
+
+    public void setRatedTabs(Map<Long, Integer> ratedTabs) {
+        this.ratedTabs = ratedTabs;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -51,16 +52,29 @@ public class TabService {
         String artist = fullName;
         String name = fullName;
         return tabRepository.findAllWithName(genre, level, guitarType, artist, name, Sort.by(Sort.Direction.valueOf(sortOrder.toUpperCase()), sortBy))
-                .stream().map(TabMapper::mapToSongDTO).filter(distinctByKey(SongDTO::id)).toList(); //do songdto dodaj wszystkie typy gitar z tabow i filtrowanie po tuningu
+                .stream().map(TabMapper::mapToSongDTO).filter(distinctByKey(SongDTO::id)).toList();
     }
 
-    public void rateTab(Long id, int rate){
-        Tab tab = tabRepository.findById(id).get();
+    public void rateTab(Long tabId, int rate, Long userId){
+        User user = userRepository.findById(userId).get();
+        Tab tab = tabRepository.findById(tabId).get();
+
+        Map<Long, Integer> ratedTabs = user.getUserDetails().getRatedTabs();
         double currentRateNumber = tab.getRateNumber();
-        double currentRate = tab.getRate()*currentRateNumber;
-        tab.setRateNumber(currentRateNumber + 1);
-        tab.setRate((currentRate+rate)/(currentRateNumber+1));
-        tabRepository.save(tab); //sprawdzanie czy juz wczesniej ocenil,jak nie toaktualizacja
+        double currentRate = tab.getRate() * currentRateNumber;
+
+        if (ratedTabs.containsKey(tabId)) {
+            double previousRate = ratedTabs.get(tabId);
+            ratedTabs.put(tabId, rate);
+            double rateDifference = rate - previousRate;
+            tab.setRate((currentRate + rateDifference) / currentRateNumber);
+        } else {
+            ratedTabs.put(tabId, rate);
+            tab.setRateNumber(currentRateNumber + 1);
+            tab.setRate((currentRate + rate) / (currentRateNumber + 1));
+        }
+        userRepository.save(user);
+        tabRepository.save(tab);
     }
 
     public void playSong(Long songId, Long userId){

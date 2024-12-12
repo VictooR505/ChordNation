@@ -65,10 +65,11 @@ public class TabController {
         return tabService.getArtists();
     }
 
-    @PatchMapping("/rate/{id}")
-    public void rareTab(@PathVariable Long id,
-                        @RequestBody int rate){
-        tabService.rateTab(id, rate);
+    @PatchMapping("/rate/{tabId}/user/{userId}")
+    public void rareTab(@PathVariable Long tabId,
+                        @RequestBody int rate,
+                        @PathVariable Long userId){
+        tabService.rateTab(tabId, rate, userId);
     }
 
     @PatchMapping("/play/{id}")
