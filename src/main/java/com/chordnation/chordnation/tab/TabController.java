@@ -20,8 +20,9 @@ public class TabController {
     }
 
     @GetMapping("/get-by-song-id/{id}")
-    public List<Tab> getAllTabsBySong(@PathVariable Long id){
-        return tabService.getTabsBySong(id);
+    public List<TabDTO> getAllTabsBySong(@PathVariable Long id,
+                                      @RequestBody Long userId){
+        return tabService.getTabsBySong(id, userId);
     }
 
     @GetMapping("/song/{id}")

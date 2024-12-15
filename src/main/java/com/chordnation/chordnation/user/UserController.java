@@ -1,5 +1,6 @@
 package com.chordnation.chordnation.user;
 
+import com.chordnation.chordnation.tab.SongDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,6 +49,11 @@ public class UserController {
     @GetMapping("/{id}/favorites")
     public FavoritesDTO getFavorites(@PathVariable Long id){
         return userService.getFavorites(id);
+    }
+
+    @GetMapping("/{id}/suggested/songs")
+    public List<SongDTO> getSuggestedSongs(@PathVariable Long id){
+        return userService.getSuggestedSongs(id);
     }
 
 

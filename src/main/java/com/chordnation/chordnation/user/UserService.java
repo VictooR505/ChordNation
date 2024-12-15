@@ -58,6 +58,7 @@ public class UserService {
                 user.getUserDetails().getFavoriteExercises());
     }
 
+    //jeszcze sugerowanie cwiczenia
     public List<SongDTO> getSuggestedSongs(Long id){
         User user = findUserById(id);
         List<Tab> songs = tabRepository.findAllSuggested(user.getUserDetails().getFavouriteGenres(), List.of(user.getUserDetails().getLevel()),

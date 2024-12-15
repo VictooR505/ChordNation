@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,9 +31,20 @@ public class TabService {
         this.userRepository = userRepository;
     }
 
-    public List<Tab> getTabsBySong(Long id){
+    public List<TabDTO> getTabsBySong(Long id, Long userId){
+        User user = userRepository.findById(userId).get();
         Song song = songRepository.findById(id).get();
-        return tabRepository.findAllBySong(song);
+        List<Tab> tabList = tabRepository.findAllBySong(song);
+        List<Long> ratedTabs = user.getUserDetails().getRatedTabs().keySet().stream().toList();
+        List<TabDTO> tabs = new ArrayList<>();
+        for (Tab tab : tabList) {
+            if (ratedTabs.contains(tab.getId())) {
+                tabs.add(new TabDTO(tab, user.getUserDetails().getRatedTabs().get(tab.getId())));
+            } else {
+                tabs.add(new TabDTO(tab, 0));
+            }
+        }
+        return tabs;
     }
 
     public SongDTO getSongById(Long id){
