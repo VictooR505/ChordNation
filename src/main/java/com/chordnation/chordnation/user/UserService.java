@@ -32,8 +32,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-    //endpoint do historii cwiczen i utworow- dwa endpointy
-
     //flaga czy to pierwsze zalogowanie na endpoincie do logowania
 
     //plus to z messengera

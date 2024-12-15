@@ -20,7 +20,7 @@ public class ExerciseController {
     }
 
     @GetMapping()
-    public List<Section> getAllExercises (){
+    public List<ExerciseDTO> getAllExercises (){
         return exerciseService.getAllExercises();
     }
 

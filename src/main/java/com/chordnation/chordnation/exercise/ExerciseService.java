@@ -28,8 +28,12 @@ public class ExerciseService {
         return exerciseRepository.findAllBySection(section);
     }
 
-    public List<Section> getAllExercises(){
-        return sectionRepository.findAll();
+    public List<ExerciseDTO> getAllExercises(){
+        List<Section> sections = sectionRepository.findAll();
+        return sections.stream().map(s -> new ExerciseDTO(s.getId(),
+                s.getName(),
+                s.getDescription(),
+                exerciseRepository.findAllBySection(s))).toList();
     }
 
     public Exercise findExerciseById(Long id){
