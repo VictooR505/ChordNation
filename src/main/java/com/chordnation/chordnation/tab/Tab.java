@@ -4,10 +4,6 @@ import com.chordnation.chordnation.enums.*;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 @Entity
 public class Tab {
@@ -17,7 +13,6 @@ public class Tab {
     @ManyToOne
     @JoinColumn(name = "song_id")
     private Song song;
-   // private Long version;
     private Level level;
     private TabType tabType;
     private GuitarType guitarType;
@@ -28,10 +23,9 @@ public class Tab {
     private double rateNumber;
     private String url;
 
-    public Tab(Long id, Song song,/* Long version,*/ Level level, TabType tabType, GuitarType guitarType, Tuning tuning, List<KeyWord> keyWords, double rate, double rateNumber, String url) {
+    public Tab(Long id, Song song, Level level, TabType tabType, GuitarType guitarType, Tuning tuning, List<KeyWord> keyWords, double rate, double rateNumber, String url) {
         this.id = id;
         this.song = song;
-    //    this.version = version;
         this.level = level;
         this.tabType = tabType;
         this.guitarType = guitarType;
@@ -52,14 +46,6 @@ public class Tab {
     public void setId(Long id) {
         this.id = id;
     }
-
-/*    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }*/
 
     public Level getLevel() {
         return level;
@@ -131,11 +117,6 @@ public class Tab {
 
     public void setSong(Song song) {
         this.song = song;
-    }
-
-    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
-        Set<Object> seen = ConcurrentHashMap.newKeySet();
-        return t -> seen.add(keyExtractor.apply(t));
     }
 
 }

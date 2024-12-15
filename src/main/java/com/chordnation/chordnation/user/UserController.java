@@ -35,6 +35,16 @@ public class UserController {
             return userService.getPreferences(id);
     }
 
+    @GetMapping("/{id}/history/exercises")
+    public List<ExercisesDone> getExercisesHistory(@PathVariable Long id){
+        return userService.getExercisesHistory(id);
+    }
+
+    @GetMapping("/{id}/history/songs")
+    public List<SongsPlayed> getSongsHistory(@PathVariable Long id){
+        return userService.getSongsHistory(id);
+    }
+
     @GetMapping("/{id}/favorites")
     public FavoritesDTO getFavorites(@PathVariable Long id){
         return userService.getFavorites(id);

@@ -32,10 +32,26 @@ public class UserService {
         userRepository.save(user);
     }
 
+    //endpoint do historii cwiczen i utworow- dwa endpointy
+
+    //flaga czy to pierwsze zalogowanie na endpoincie do logowania
+
+    //plus to z messengera
+
     public UserPreferencesDTO getPreferences(Long id){
         User user = findUserById(id);
         return new UserPreferencesDTO(user.getUserDetails().getFavouriteArtists(),
                 user.getUserDetails().getFavouriteGenres(), user.getUserDetails().getKeyWords());
+    }
+
+    public List<ExercisesDone> getExercisesHistory(Long id){
+        User user = findUserById(id);
+        return user.getUserDetails().getExercisesDone();
+    }
+
+    public List<SongsPlayed> getSongsHistory(Long id){
+        User user = findUserById(id);
+        return user.getUserDetails().getSongsPlayed();
     }
 
     public FavoritesDTO getFavorites(Long id){
