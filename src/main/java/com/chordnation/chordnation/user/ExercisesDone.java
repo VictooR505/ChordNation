@@ -1,5 +1,6 @@
 package com.chordnation.chordnation.user;
 
+import com.chordnation.chordnation.enums.Level;
 import jakarta.persistence.Embeddable;
 
 import java.time.LocalDateTime;
@@ -8,12 +9,12 @@ import java.time.LocalDateTime;
 public class ExercisesDone {
     private Long exerciseId;
     private LocalDateTime doneDate;
-    private Integer level;
+    private Level level;
 
     public ExercisesDone() {
     }
 
-    public ExercisesDone(Long exerciseId, LocalDateTime doneDate, Integer level) {
+    public ExercisesDone(Long exerciseId, LocalDateTime doneDate, Level level) {
         this.exerciseId = exerciseId;
         this.doneDate = doneDate;
         this.level = level;
@@ -35,11 +36,11 @@ public class ExercisesDone {
         this.doneDate = doneDate;
     }
 
-    public Integer getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(Level level) {
         this.level = level;
     }
 }

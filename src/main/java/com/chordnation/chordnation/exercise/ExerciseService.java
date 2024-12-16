@@ -44,7 +44,7 @@ public class ExerciseService {
         User user = userRepository.findById(userId).get();
         UserDetails userDetails = user.getUserDetails();
         List<ExercisesDone> exercisesDone = userDetails.getExercisesDone();
-        ExercisesDone exercise = new ExercisesDone(exerciseId, LocalDateTime.now(), level);
+        ExercisesDone exercise = new ExercisesDone(exerciseId, LocalDateTime.now(), Level.values()[level]);
         exercisesDone.add(exercise);
         userDetails.setExercisesDone(exercisesDone);
         userRepository.save(user);
@@ -73,6 +73,7 @@ public class ExerciseService {
         if(points>=3000){
             user.getUserDetails().setLevel(Level.MASTER);
         }
+        userRepository.save(user);
         //przykladowe wartosci,do zmiany
     }
 
