@@ -2,6 +2,8 @@ package com.chordnation.chordnation.user;
 
 import com.chordnation.chordnation.exercise.Exercise;
 import com.chordnation.chordnation.tab.SongDTO;
+import com.chordnation.chordnation.user.dto.FavoritesDTO;
+import com.chordnation.chordnation.user.dto.UserPreferencesDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
