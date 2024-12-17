@@ -21,7 +21,7 @@ public class TabController {
 
     @GetMapping("/get-by-song-id/{id}")
     public List<TabDTO> getAllTabsBySong(@PathVariable Long id,
-                                      @RequestBody Long userId){
+                                         @RequestParam Long userId){
         return tabService.getTabsBySong(id, userId);
     }
 
