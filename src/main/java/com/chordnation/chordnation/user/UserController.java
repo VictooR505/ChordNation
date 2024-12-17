@@ -1,5 +1,6 @@
 package com.chordnation.chordnation.user;
 
+import com.chordnation.chordnation.exercise.Exercise;
 import com.chordnation.chordnation.tab.SongDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,6 +55,11 @@ public class UserController {
     @GetMapping("/{id}/suggested/songs")
     public List<SongDTO> getSuggestedSongs(@PathVariable Long id){
         return userService.getSuggestedSongs(id);
+    }
+
+    @GetMapping("/{id}/suggested/exercises")
+    public List<Exercise> getSuggestedExercises(@PathVariable Long id){
+        return userService.getSuggestedExercises(id);
     }
 
 

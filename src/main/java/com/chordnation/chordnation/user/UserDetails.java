@@ -31,8 +31,9 @@ public class UserDetails {
     private List<KeyWord> keyWords;
     @ElementCollection
     private Map<Long, Integer> ratedTabs;
+    private boolean firstLogin;
 
-    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords, Map<Long, Integer> ratedTabs) {
+    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords, Map<Long, Integer> ratedTabs, boolean firstLogin) {
         this.level = level;
         this.guitarType = guitarType;
         this.favouriteGenres = favouriteGenres;
@@ -42,6 +43,7 @@ public class UserDetails {
         this.points = points;
         this.keyWords = keyWords;
         this.ratedTabs = ratedTabs;
+        this.firstLogin = firstLogin;
     }
 
     public UserDetails() {
@@ -133,5 +135,13 @@ public class UserDetails {
 
     public void setRatedTabs(Map<Long, Integer> ratedTabs) {
         this.ratedTabs = ratedTabs;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
     }
 }

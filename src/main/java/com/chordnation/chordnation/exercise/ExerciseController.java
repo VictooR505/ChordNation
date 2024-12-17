@@ -36,13 +36,13 @@ public class ExerciseController {
         exerciseService.doExercise(userId, id, level);
     }
 
-    @PatchMapping("/{exerciseId}/songs/add/{userId}")
+    @PatchMapping("/{exerciseId}/add/{userId}")
     public void addToFavourites(@PathVariable Long userId,
                                 @PathVariable Long exerciseId){
         exerciseService.addToFavourites(userId, exerciseId);
     }
 
-    @PatchMapping("/{exerciseId}/songs/remove/{userId}")
+    @PatchMapping("/{exerciseId}/remove/{userId}")
     public void removeFromFavourites(@PathVariable Long userId,
                                 @PathVariable Long exerciseId){
         exerciseService.removeFromFavourites(userId, exerciseId);

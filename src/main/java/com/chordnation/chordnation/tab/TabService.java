@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class TabService {
@@ -35,16 +36,11 @@ public class TabService {
         User user = userRepository.findById(userId).get();
         Song song = songRepository.findById(id).get();
         List<Tab> tabList = tabRepository.findAllBySong(song);
-        List<Long> ratedTabs = user.getUserDetails().getRatedTabs().keySet().stream().toList();
-        List<TabDTO> tabs = new ArrayList<>();
-        for (Tab tab : tabList) {
-            if (ratedTabs.contains(tab.getId())) {
-                tabs.add(new TabDTO(tab, user.getUserDetails().getRatedTabs().get(tab.getId())));
-            } else {
-                tabs.add(new TabDTO(tab, 0));
-            }
-        }
-        return tabs;
+        Map<Long, Integer> ratedTabs = user.getUserDetails().getRatedTabs();
+
+        return tabList.stream()
+                .map(tab -> mapToTabDTO(tab, ratedTabs.getOrDefault(tab.getId(), 0)))
+                .collect(Collectors.toList());
     }
 
     public SongDTO getSongById(Long id){
@@ -126,5 +122,20 @@ public class TabService {
     public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
         Set<Object> seen = ConcurrentHashMap.newKeySet();
         return t -> seen.add(keyExtractor.apply(t));
+    }
+
+    private TabDTO mapToTabDTO(Tab tab, int userRate) {
+        return new TabDTO(
+                userRate,
+                tab.getId(),
+                tab.getLevel(),
+                tab.getTabType(),
+                tab.getGuitarType(),
+                tab.getTuning(),
+                tab.getKeyWords(),
+                tab.getRate(),
+                tab.getRateNumber(),
+                tab.getUrl()
+        );
     }
 }
