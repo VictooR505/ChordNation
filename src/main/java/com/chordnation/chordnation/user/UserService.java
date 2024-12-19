@@ -45,7 +45,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-    //flaga czy to pierwsze zalogowanie na endpoincie do logowania
     //endpoint do statystyk (czas cwiczen/ sredni czas sesji/ ostatnio cwiczony utwor/cwiczenie
 
     public UserPreferencesDTO getPreferences(Long id){

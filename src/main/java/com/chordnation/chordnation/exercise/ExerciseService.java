@@ -8,7 +8,9 @@ import com.chordnation.chordnation.user.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExerciseService {
@@ -45,10 +47,19 @@ public class ExerciseService {
         UserDetails userDetails = user.getUserDetails();
         List<ExercisesDone> exercisesDone = userDetails.getExercisesDone();
         ExercisesDone exercise = new ExercisesDone(exerciseId, LocalDateTime.now(), Level.values()[level]);
+
+        Optional<Level> maxLevel = exercisesDone.stream()
+                .filter(e -> e.getExerciseId().equals(exerciseId))
+                .max(Comparator.comparing(ExercisesDone::getLevel))
+                .map(ExercisesDone::getLevel);
+
+        if (maxLevel.isEmpty() || maxLevel.get().ordinal() < level) {
+            addPoints(userId, exerciseId, level);
+        }
+
         exercisesDone.add(exercise);
         userDetails.setExercisesDone(exercisesDone);
         userRepository.save(user);
-        addPoints(userId, exerciseId, level);
     }
 
     public void addPoints(Long userId, Long exerciseId, int level){
@@ -64,17 +75,9 @@ public class ExerciseService {
     public void calculateLevel(Long userId){
         User user = userRepository.findById(userId).get();
         int points = user.getUserDetails().getPoints();
-        if(points>1000 && points<2000){
-            user.getUserDetails().setLevel(Level.INTERMEDIATE);
-        }
-        if(points>=2000 && points<3000){
-            user.getUserDetails().setLevel(Level.ADVANCED);
-        }
-        if(points>=3000){
-            user.getUserDetails().setLevel(Level.MASTER);
-        }
+        Level newLevel = Level.calculateLevel(points);
+        user.getUserDetails().setLevel(newLevel);
         userRepository.save(user);
-        //przykladowe wartosci,do zmiany
     }
 
     public void addToFavourites(Long userId, Long exerciseId){
