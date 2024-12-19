@@ -1,5 +1,7 @@
 package com.chordnation.chordnation.security;
 
+import com.chordnation.chordnation.user.User;
+import com.chordnation.chordnation.user.UserRepository;
 import com.chordnation.chordnation.user.dto.AuthenticationDTO;
 import com.chordnation.chordnation.user.dto.AuthenticationResponse;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,12 +30,21 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
     @PostMapping("/authenticate")
     public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationDTO authenticationDTO, HttpServletResponse response) throws BadCredentialsException, DisabledException, UsernameNotFoundException, IOException {
+        User user = userRepository.findByEmail(authenticationDTO.email());
+        boolean firstLogin = user.getUserDetails().isFirstLogin();
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationDTO.email(), authenticationDTO.password()));
+            if(user.getUserDetails().isFirstLogin()){
+                user.getUserDetails().setFirstLogin(false);
+                userRepository.save(user);
+            }
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("Incorrect username or password!");
         } catch (DisabledException disabledException) {
@@ -45,7 +56,7 @@ public class AuthenticationController {
 
         final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
-        return new AuthenticationResponse(jwt);
+        return new AuthenticationResponse(jwt, firstLogin);
 
     }
 
