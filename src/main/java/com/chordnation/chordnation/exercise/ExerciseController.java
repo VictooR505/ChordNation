@@ -31,8 +31,8 @@ public class ExerciseController {
 
     @PatchMapping("/do/{id}")
     public void doExercise(@PathVariable Long id,
-                           @RequestBody Long userId,
-                           @RequestBody int level){
+                           @RequestParam Long userId,
+                           @RequestParam int level){
         exerciseService.doExercise(userId, id, level);
     }
 
