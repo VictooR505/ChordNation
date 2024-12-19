@@ -9,6 +9,7 @@ import com.chordnation.chordnation.user.dto.FavoritesDTO;
 import com.chordnation.chordnation.user.dto.UserPreferencesDTO;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -53,14 +54,22 @@ public class UserService {
                 user.getUserDetails().getFavouriteGenres(), user.getUserDetails().getKeyWords());
     }
 
-    public List<ExercisesDone> getExercisesHistory(Long id){
+    public List<ExercisesDone> getExercisesHistory(Long id, LocalDateTime date){
         User user = findUserById(id);
-        return user.getUserDetails().getExercisesDone();
+        if (date == null){
+            date = LocalDateTime.of(2020, 1, 1, 0, 0, 0);
+        }
+        LocalDateTime finalDate = date;
+        return user.getUserDetails().getExercisesDone().stream().filter(e -> e.getDoneDate().isAfter(finalDate)).toList();
     }
 
-    public List<SongsPlayed> getSongsHistory(Long id){
+    public List<SongsPlayed> getSongsHistory(Long id, LocalDateTime date){
         User user = findUserById(id);
-        return user.getUserDetails().getSongsPlayed();
+        if (date == null){
+            date = LocalDateTime.of(2020, 1, 1, 0, 0, 0);
+        }
+        LocalDateTime finalDate = date;
+        return user.getUserDetails().getSongsPlayed().stream().filter(s -> s.getPlayDate().isAfter(finalDate)).toList();
     }
 
     public FavoritesDTO getFavorites(Long id){

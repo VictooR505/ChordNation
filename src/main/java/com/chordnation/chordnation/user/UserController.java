@@ -6,6 +6,8 @@ import com.chordnation.chordnation.user.dto.FavoritesDTO;
 import com.chordnation.chordnation.user.dto.UserPreferencesDTO;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -40,13 +42,15 @@ public class UserController {
     }
 
     @GetMapping("/{id}/history/exercises")
-    public List<ExercisesDone> getExercisesHistory(@PathVariable Long id){
-        return userService.getExercisesHistory(id);
+    public List<ExercisesDone> getExercisesHistory(@PathVariable Long id,
+                                                   @RequestBody LocalDateTime date){
+        return userService.getExercisesHistory(id, date);
     }
 
     @GetMapping("/{id}/history/songs")
-    public List<SongsPlayed> getSongsHistory(@PathVariable Long id){
-        return userService.getSongsHistory(id);
+    public List<SongsPlayed> getSongsHistory(@PathVariable Long id,
+                                             @RequestBody LocalDateTime date){
+        return userService.getSongsHistory(id, date);
     }
 
     @GetMapping("/{id}/favorites")
