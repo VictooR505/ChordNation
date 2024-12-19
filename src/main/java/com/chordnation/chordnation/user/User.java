@@ -9,6 +9,7 @@ public class User {
     private Long id;
     private String name;
     private String email;
+    private String password;
     @Embedded
     private UserDetails userDetails;
 
@@ -19,10 +20,11 @@ public class User {
         this.userDetails = userDetails;
     }
 
-    public User(Long id, String name, String email) {
+    public User(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.password = password;
     }
 
     public User() {
@@ -58,5 +60,13 @@ public class User {
 
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -1,4 +1,4 @@
-package com.chordnation.chordnation.user;
+package com.chordnation.chordnation.user.dto;
 
 import com.chordnation.chordnation.enums.Genre;
 import com.chordnation.chordnation.enums.KeyWord;

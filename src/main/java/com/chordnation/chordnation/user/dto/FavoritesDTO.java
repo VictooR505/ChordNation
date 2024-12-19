@@ -1,4 +1,4 @@
-package com.chordnation.chordnation.user;
+package com.chordnation.chordnation.user.dto;
 
 import java.util.List;
 

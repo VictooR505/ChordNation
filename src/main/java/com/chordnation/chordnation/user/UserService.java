@@ -5,6 +5,8 @@ import com.chordnation.chordnation.enums.Level;
 import com.chordnation.chordnation.exercise.Exercise;
 import com.chordnation.chordnation.exercise.ExerciseRepository;
 import com.chordnation.chordnation.tab.*;
+import com.chordnation.chordnation.user.dto.FavoritesDTO;
+import com.chordnation.chordnation.user.dto.UserPreferencesDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

@@ -12,4 +12,15 @@ public class TabMapper {
                 tab.getGuitarType()
         );
     }
+    public static SongDTO mapToTabDTO(Tab tab) {
+        return new SongDTO(
+                tab.getSong().getId(),
+                tab.getSong().getArtist(),
+                tab.getSong().getName(),
+                tab.getSong().getGenre(),
+                tab.getLevel(),
+                tab.getSong().getImageUrl(),
+                tab.getGuitarType()
+        );
+    }
 }
