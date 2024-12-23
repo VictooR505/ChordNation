@@ -45,7 +45,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    //endpoint do statystyk (czas cwiczen/ sredni czas sesji/ ostatnio cwiczony utwor/cwiczenie
+    //endpoint do statystyk (czas cwiczen/ sredni czas sesji/ ostatnio cwiczony utwor/cwiczenie/ najczesciej grany utwor wraz z liczba
 
     public UserPreferencesDTO getPreferences(Long id){
         User user = findUserById(id);
@@ -100,7 +100,10 @@ public class UserService {
         return allExercises.stream()
                 .sorted(Comparator.comparing(Exercise::getRequiredPoints)
                         .thenComparing((Exercise e) -> {
-                            ExercisesDone done = user.getUserDetails().getExercisesDone().get(e.getId().intValue());
+                            ExercisesDone done = user.getUserDetails().getExercisesDone().stream()
+                                    .filter(ed -> ed.getExerciseId().equals(e.getId()))
+                                    .findFirst()
+                                    .orElse(null);
                             if (done == null) {
                                 return 0;
                             }
