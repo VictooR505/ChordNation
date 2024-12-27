@@ -32,8 +32,10 @@ public class UserDetails {
     @ElementCollection
     private Map<Long, Integer> ratedTabs;
     private boolean firstLogin;
+    private long averageSessionTime;
+    private long totalSessionTime;
 
-    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords, Map<Long, Integer> ratedTabs, boolean firstLogin) {
+    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords, Map<Long, Integer> ratedTabs, boolean firstLogin, long averageSessionTime, long totalSessionTime) {
         this.level = level;
         this.guitarType = guitarType;
         this.favouriteGenres = favouriteGenres;
@@ -44,6 +46,8 @@ public class UserDetails {
         this.keyWords = keyWords;
         this.ratedTabs = ratedTabs;
         this.firstLogin = firstLogin;
+        this.averageSessionTime = averageSessionTime;
+        this.totalSessionTime = totalSessionTime;
     }
 
     public UserDetails() {
@@ -143,5 +147,21 @@ public class UserDetails {
 
     public void setFirstLogin(boolean firstLogin) {
         this.firstLogin = firstLogin;
+    }
+
+    public long getAverageSessionTime() {
+        return averageSessionTime;
+    }
+
+    public void setAverageSessionTime(long averageSessionTime) {
+        this.averageSessionTime = averageSessionTime;
+    }
+
+    public long getTotalSessionTime() {
+        return totalSessionTime;
+    }
+
+    public void setTotalSessionTime(long totalSessionTime) {
+        this.totalSessionTime = totalSessionTime;
     }
 }

@@ -2,6 +2,7 @@ package com.chordnation.chordnation.exercise;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -31,9 +32,8 @@ public class ExerciseController {
 
     @PatchMapping("/do/{id}")
     public void doExercise(@PathVariable Long id,
-                           @RequestParam Long userId,
-                           @RequestParam int level){
-        exerciseService.doExercise(userId, id, level);
+                           @RequestBody doExerciseDTO doExerciseDTO){
+        exerciseService.doExercise(id, doExerciseDTO.userId(), doExerciseDTO.level(), doExerciseDTO.start(), doExerciseDTO.end());
     }
 
     @PatchMapping("/{exerciseId}/add/{userId}")

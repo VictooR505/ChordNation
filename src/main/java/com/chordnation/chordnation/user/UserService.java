@@ -6,14 +6,13 @@ import com.chordnation.chordnation.exercise.Exercise;
 import com.chordnation.chordnation.exercise.ExerciseRepository;
 import com.chordnation.chordnation.tab.*;
 import com.chordnation.chordnation.user.dto.FavoritesDTO;
+import com.chordnation.chordnation.user.dto.StatisticsDTO;
 import com.chordnation.chordnation.user.dto.UserPreferencesDTO;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,11 +21,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final TabRepository tabRepository;
     private final ExerciseRepository exerciseRepository;
+    private final SongRepository songRepository;
 
-    public UserService(UserRepository userRepository, TabRepository tabRepository, ExerciseRepository exerciseRepository) {
+    public UserService(UserRepository userRepository, TabRepository tabRepository, ExerciseRepository exerciseRepository, SongRepository songRepository) {
         this.userRepository = userRepository;
         this.tabRepository = tabRepository;
         this.exerciseRepository = exerciseRepository;
+        this.songRepository = songRepository;
     }
 
     public List<User> findAllUsers(){
@@ -44,8 +45,6 @@ public class UserService {
         user.getUserDetails().setKeyWords(preferences.keyWords());
         userRepository.save(user);
     }
-
-    //endpoint do statystyk (czas cwiczen/ sredni czas sesji/ ostatnio cwiczony utwor/cwiczenie/ najczesciej grany utwor wraz z liczba
 
     public UserPreferencesDTO getPreferences(Long id){
         User user = findUserById(id);
@@ -117,5 +116,42 @@ public class UserService {
                         })
                 )
                 .collect(Collectors.toList());
+    }
+
+    public StatisticsDTO getStatistics(Long id){
+        User user = userRepository.findById(id).get();
+        UserDetails userDetails = user.getUserDetails();
+        String lastExercise = userDetails.getExercisesDone().stream()
+                .reduce((first, second) -> second)
+                .map(ExercisesDone::getExerciseId)
+                .flatMap(exerciseId -> exerciseRepository.findById(exerciseId).map(Exercise::getName))
+                .orElse("No exercises done");
+
+        String lastSong = userDetails.getSongsPlayed().stream()
+                .reduce((first, second) -> second)
+                .map(SongsPlayed::getSongId)
+                .flatMap(songId -> songRepository.findById(songId).map(Song::getName))
+                .orElse("No songs played");
+
+        String totalTime = formatTime(userDetails.getTotalSessionTime());
+        String averageTime = formatTime(userDetails.getAverageSessionTime());
+
+        return new StatisticsDTO(
+                userDetails.getLevel(),
+                userDetails.getPoints(),
+                totalTime,
+                averageTime,
+                lastExercise,
+                lastSong
+        );
+    }
+
+    public String formatTime(long totalSeconds) {
+        Duration duration = Duration.ofSeconds(totalSeconds);
+        long hours = duration.toHours();
+        long minutes = duration.toMinutesPart();
+        long seconds = duration.toSecondsPart();
+
+        return String.format("%02dh:%02dm:%02ds", hours, minutes, seconds);
     }
 }

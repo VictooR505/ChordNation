@@ -1,4 +1,6 @@
 package com.chordnation.chordnation.user.dto;
 
-public record SignupDTO(String name, String email, String password) {
+import com.chordnation.chordnation.enums.Level;
+
+public record SignupDTO(String name, String email, String password, Level level) {
 }

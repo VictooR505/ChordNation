@@ -18,12 +18,14 @@ public class AuthService {
         User user = new User();
         user.setName(signupDTO.name());
         user.setEmail(signupDTO.email());
+        user.getUserDetails().setLevel(signupDTO.level());
         user.setPassword(new BCryptPasswordEncoder().encode(signupDTO.password()));
         User createdUser = userRepository.save(user);
         return new UserDTO(
                 createdUser.getId(),
                 createdUser.getEmail(),
-                createdUser.getName()
+                createdUser.getName(),
+                createdUser.getUserDetails().getLevel()
         );
     }
 }
