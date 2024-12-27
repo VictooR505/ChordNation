@@ -33,7 +33,14 @@ public class ExerciseController {
     @PatchMapping("/do/{id}")
     public void doExercise(@PathVariable Long id,
                            @RequestBody doExerciseDTO doExerciseDTO){
-        exerciseService.doExercise(id, doExerciseDTO.userId(), doExerciseDTO.level(), doExerciseDTO.start(), doExerciseDTO.end());
+        exerciseService.doExercise(id, doExerciseDTO.userId(), doExerciseDTO.level(), doExerciseDTO.time());
+    }
+
+    @PatchMapping("/rate/{id}")
+    public int rateExercise(@PathVariable Long id,
+                             @RequestParam Long userId,
+                             @RequestParam int level){
+        return exerciseService.rateExercise(id, userId, level);
     }
 
     @PatchMapping("/{exerciseId}/add/{userId}")

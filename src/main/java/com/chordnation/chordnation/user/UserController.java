@@ -43,13 +43,13 @@ public class UserController {
 
     @GetMapping("/{id}/history/exercises")
     public List<ExercisesDone> getExercisesHistory(@PathVariable Long id,
-                                                   @RequestParam LocalDateTime date){
+                                                   @RequestParam(required = false) LocalDateTime date){
         return userService.getExercisesHistory(id, date);
     }
 
     @GetMapping("/{id}/history/songs")
     public List<SongsPlayed> getSongsHistory(@PathVariable Long id,
-                                             @RequestParam LocalDateTime date){
+                                             @RequestParam(required = false) LocalDateTime date){
         return userService.getSongsHistory(id, date);
     }
 
