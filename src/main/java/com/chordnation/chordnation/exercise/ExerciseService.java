@@ -43,7 +43,7 @@ public class ExerciseService {
         return exerciseRepository.findById(id).get();
     }
 
-    public void doExercise(Long userId, Long exerciseId, int level, LocalDateTime start, LocalDateTime end){
+    public void doExercise(Long exerciseId, Long userId, Integer level, long time){
         User user = userRepository.findById(userId).get();
         UserDetails userDetails = user.getUserDetails();
         List<ExercisesDone> exercisesDone = userDetails.getExercisesDone();
@@ -61,11 +61,31 @@ public class ExerciseService {
         exercisesDone.add(exercise);
         userDetails.setExercisesDone(exercisesDone);
 
-        long time = start.until(end, ChronoUnit.SECONDS);
         userDetails.setTotalSessionTime(userDetails.getTotalSessionTime()+time);
         userDetails.setAverageSessionTime(userDetails.getTotalSessionTime()/exercisesDone.size());
 
         userRepository.save(user);
+    }
+
+    public int rateExercise(Long exerciseId, Long userId, int level){
+        User user = userRepository.findById(userId).get();
+        UserDetails userDetails = user.getUserDetails();
+        List<ExercisesDone> exercisesDone = userDetails.getExercisesDone();
+        ExercisesDone exercise = new ExercisesDone(exerciseId, LocalDateTime.now(), Level.values()[level]);
+
+        Optional<Level> maxLevel = exercisesDone.stream()
+                                       .filter(e -> e.getExerciseId().equals(exerciseId))
+                                       .max(Comparator.comparing(ExercisesDone::getLevel))
+                                       .map(ExercisesDone::getLevel);
+
+        if (maxLevel.isEmpty() || maxLevel.get().ordinal() < level) {
+            addPoints(userId, exerciseId, level);
+        }
+
+        exercisesDone.add(exercise);
+        userDetails.setExercisesDone(exercisesDone);
+        userRepository.save(user);
+        return level;
     }
 
     public void addPoints(Long userId, Long exerciseId, int level){
