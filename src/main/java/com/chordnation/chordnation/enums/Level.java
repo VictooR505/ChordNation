@@ -22,4 +22,8 @@ public enum Level {
                 .findFirst()
                 .orElse(BEGINNER);
     }
+
+    public int getMaxPoints() {
+        return maxPoints;
+    }
 }

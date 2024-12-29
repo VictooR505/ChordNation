@@ -32,8 +32,8 @@ insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_n
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (15, 2, 1, 1, 0, 0, 0, 0, 'https://example.com/tab1');
 
 -- MOCK USERS
-insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time) values (1, 'test@onet.pl', 'test 123', 'pass', 0, false, 1, 1, 700, 0);
-insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time) values (2, 'test2@onet.pl', 'test 124', 'pass', 0, false, 1, 1, 100, 0);
+insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time) values (1, 'test@onet.pl', 'test 123', 'pass', 0, false, 1, 0, 700, 0);
+insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time) values (2, 'test2@onet.pl', 'test 124', 'pass', 0, false, 1, 0, 100, 0);
 
 -- SECTIONS
 insert into section (id, name, description) values (1, 'Sekcja 1: Wprowadzenie do Gry na Gitarze', 'Ta sekcja wprowadza podstawowe pojęcia związane z grą na gitarze, w tym podstawowe akordy i strojenie.');

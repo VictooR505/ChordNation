@@ -125,13 +125,13 @@ public class UserService {
                 .reduce((first, second) -> second)
                 .map(ExercisesDone::getExerciseId)
                 .flatMap(exerciseId -> exerciseRepository.findById(exerciseId).map(Exercise::getName))
-                .orElse("No exercises done");
+                .orElse("Brak wykonanych ćwiczeń");
 
         String lastSong = userDetails.getSongsPlayed().stream()
                 .reduce((first, second) -> second)
                 .map(SongsPlayed::getSongId)
-                .flatMap(songId -> songRepository.findById(songId).map(Song::getName))
-                .orElse("No songs played");
+                .flatMap(songId -> songRepository.findById(songId).map(s -> s.getArtist()+": " + s.getName()))
+                .orElse("Brak zagranych utworów");
 
         String totalTime = formatTime(userDetails.getTotalSessionTime());
         String averageTime = formatTime(userDetails.getAverageSessionTime());
@@ -142,7 +142,8 @@ public class UserService {
                 totalTime,
                 averageTime,
                 lastExercise,
-                lastSong
+                lastSong,
+                userDetails.getLevel().getMaxPoints()
         );
     }
 
