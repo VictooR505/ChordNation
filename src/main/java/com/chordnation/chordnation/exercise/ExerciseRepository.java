@@ -11,6 +11,5 @@ import java.util.List;
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     List<Exercise> findAllBySection(Section section);
 
-    @Query("SELECT e FROM Exercise e WHERE (e.requiredPoints < :points)")
-    List<Exercise> findAllSuggested(int points);
+    List<Exercise> findAllByRequiredPointsIsLessThan(int points);
 }

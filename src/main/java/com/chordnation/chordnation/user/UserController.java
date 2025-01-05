@@ -73,5 +73,9 @@ public class UserController {
         return userService.getStatistics(id);
     }
 
+    @GetMapping("/preferenceSettings")
+    public UserPreferencesDTO getAllPreferenceSettings() {
+        return userService.getAllPreferenceSettings();
+    }
 
 }

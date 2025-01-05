@@ -34,8 +34,9 @@ public class UserDetails {
     private boolean firstLogin;
     private long averageSessionTime;
     private long totalSessionTime;
+    private int exercisePlayedToSessionTime;
 
-    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords, Map<Long, Integer> ratedTabs, boolean firstLogin, long averageSessionTime, long totalSessionTime) {
+    public UserDetails(Level level, GuitarType guitarType, List<Genre> favouriteGenres, List<String> favoriteArtists, List<Long> favouriteSongs, List<Long> favoriteExercises, int points, List<KeyWord> keyWords, Map<Long, Integer> ratedTabs, boolean firstLogin, long averageSessionTime, long totalSessionTime, int exercisePlayedToSessionTime) {
         this.level = level;
         this.guitarType = guitarType;
         this.favouriteGenres = favouriteGenres;
@@ -48,6 +49,7 @@ public class UserDetails {
         this.firstLogin = firstLogin;
         this.averageSessionTime = averageSessionTime;
         this.totalSessionTime = totalSessionTime;
+        this.exercisePlayedToSessionTime = exercisePlayedToSessionTime;
     }
 
     public UserDetails() {
@@ -163,5 +165,13 @@ public class UserDetails {
 
     public void setTotalSessionTime(long totalSessionTime) {
         this.totalSessionTime = totalSessionTime;
+    }
+
+    public int getExercisePlayedToSessionTime() {
+        return exercisePlayedToSessionTime;
+    }
+
+    public void setExercisePlayedToSessionTime(int exercisePlayedToSessionTime) {
+        this.exercisePlayedToSessionTime = exercisePlayedToSessionTime;
     }
 }

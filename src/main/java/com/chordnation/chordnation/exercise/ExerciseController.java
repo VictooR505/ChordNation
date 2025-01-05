@@ -2,7 +2,6 @@ package com.chordnation.chordnation.exercise;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController

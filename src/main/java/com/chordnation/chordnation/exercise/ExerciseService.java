@@ -8,7 +8,6 @@ import com.chordnation.chordnation.user.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -61,8 +60,10 @@ public class ExerciseService {
         exercisesDone.add(exercise);
         userDetails.setExercisesDone(exercisesDone);
 
+        userDetails.setExercisePlayedToSessionTime(userDetails.getExercisePlayedToSessionTime()+1);
+
         userDetails.setTotalSessionTime(userDetails.getTotalSessionTime()+time);
-        userDetails.setAverageSessionTime(userDetails.getTotalSessionTime()/exercisesDone.size());
+        userDetails.setAverageSessionTime(userDetails.getTotalSessionTime()/userDetails.getExercisePlayedToSessionTime());
 
         userRepository.save(user);
     }
@@ -79,6 +80,7 @@ public class ExerciseService {
                                        .map(ExercisesDone::getLevel);
 
         if (maxLevel.isEmpty() || maxLevel.get().ordinal() < level) {
+            level = level - maxLevel.get().ordinal();
             addPoints(userId, exerciseId, level);
         }
 

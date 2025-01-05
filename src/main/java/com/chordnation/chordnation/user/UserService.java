@@ -1,5 +1,6 @@
 package com.chordnation.chordnation.user;
 
+import com.chordnation.chordnation.enums.Genre;
 import com.chordnation.chordnation.enums.KeyWord;
 import com.chordnation.chordnation.enums.Level;
 import com.chordnation.chordnation.exercise.Exercise;
@@ -86,7 +87,7 @@ public class UserService {
                 songs.remove(i);
             }
         }
-        return songs.stream().map(TabMapper::mapToSongDTO).toList();
+        return songs.stream().map(TabMapper::mapToSongDTO).limit(3).toList();
     }
 
     public List<Exercise> getSuggestedExercises(Long id){
@@ -94,7 +95,7 @@ public class UserService {
         Level userLevel = user.getUserDetails().getLevel();
         Set<KeyWord> userKeywords = new HashSet<>(user.getUserDetails().getKeyWords());
 
-        List<Exercise> allExercises = exerciseRepository.findAllSuggested(user.getUserDetails().getPoints());
+        List<Exercise> allExercises = exerciseRepository.findAllByRequiredPointsIsLessThan(user.getUserDetails().getPoints());
 
         return allExercises.stream()
                 .sorted(Comparator.comparing(Exercise::getRequiredPoints)
@@ -115,6 +116,7 @@ public class UserService {
                             return -matchingKeywords;
                         })
                 )
+                .limit(5)
                 .collect(Collectors.toList());
     }
 
@@ -145,6 +147,12 @@ public class UserService {
                 lastSong,
                 userDetails.getLevel().getMaxPoints()
         );
+    }
+
+    public UserPreferencesDTO getAllPreferenceSettings(){
+        return new UserPreferencesDTO(songRepository.getAllArtists(),
+                Arrays.stream(Genre.values()).toList(),
+                Arrays.stream(KeyWord.values()).toList());
     }
 
     public String formatTime(long totalSeconds) {
