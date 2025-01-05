@@ -7,7 +7,9 @@ import com.chordnation.chordnation.exercise.Exercise;
 import com.chordnation.chordnation.exercise.ExerciseRepository;
 import com.chordnation.chordnation.tab.*;
 import com.chordnation.chordnation.user.dto.FavoritesDTO;
+import com.chordnation.chordnation.user.dto.KeyWordDTO;
 import com.chordnation.chordnation.user.dto.StatisticsDTO;
+import com.chordnation.chordnation.user.dto.UserPreferencesConfigDTO;
 import com.chordnation.chordnation.user.dto.UserPreferencesDTO;
 import org.springframework.stereotype.Service;
 
@@ -159,10 +161,16 @@ public class UserService {
         );
     }
 
-    public UserPreferencesDTO getAllPreferenceSettings(){
-        return new UserPreferencesDTO(songRepository.getAllArtists(),
-                Arrays.stream(Genre.values()).toList(),
-                Arrays.stream(KeyWord.values()).toList());
+    public UserPreferencesConfigDTO getAllPreferenceSettings() {
+        List<KeyWordDTO> keyWordDTOs = Arrays.stream(KeyWord.values())
+                                           .map(keyWord -> new KeyWordDTO(keyWord.name(), keyWord.getDescription()))
+                                           .toList();
+
+        return new UserPreferencesConfigDTO(
+            songRepository.getAllArtists(),
+            Arrays.stream(Genre.values()).toList(),
+            keyWordDTOs
+        );
     }
 
     public String formatTime(long totalSeconds) {
