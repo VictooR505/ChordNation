@@ -161,16 +161,25 @@ public class UserService {
         );
     }
 
-    public UserPreferencesConfigDTO getAllPreferenceSettings() {
-        List<KeyWordDTO> keyWordDTOs = Arrays.stream(KeyWord.values())
-                                           .map(keyWord -> new KeyWordDTO(keyWord.name(), keyWord.getDescription()))
-                                           .toList();
+    public UserPreferencesConfigDTO getUserPreferencesConfig() {
 
-        return new UserPreferencesConfigDTO(
-            songRepository.getAllArtists(),
-            Arrays.stream(Genre.values()).toList(),
-            keyWordDTOs
-        );
+        List<String> artists = songRepository.getAllArtists();
+        List<Genre> genres = Arrays.stream(Genre.values()).toList();
+
+        List<KeyWordDTO> keyWords = KeyWord.getGroupedByGroup().entrySet().stream()
+                .map(entry -> {
+                    String group = entry.getKey();
+                    List<Map<String, String>> keyWordsByGroup = entry.getValue().stream()
+                            .map(keyword -> Map.of(
+                                    "name", keyword.name(),
+                                    "description", keyword.getDescription()
+                            ))
+                            .collect(Collectors.toList());
+                    return new KeyWordDTO(group, keyWordsByGroup);
+                })
+                .collect(Collectors.toList());
+
+        return new UserPreferencesConfigDTO(artists, genres, keyWords);
     }
 
     public String formatTime(long totalSeconds) {

@@ -1,4 +1,7 @@
 package com.chordnation.chordnation.user.dto;
 
-public record KeyWordDTO(String code, String description) {
+import java.util.List;
+import java.util.Map;
+
+public record KeyWordDTO(String group, List<Map<String, String>> keyWordsByGroup) {
 }

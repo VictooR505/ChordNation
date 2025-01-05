@@ -76,7 +76,7 @@ public class UserController {
 
     @GetMapping("/preferenceSettings")
     public UserPreferencesConfigDTO getAllPreferenceSettings() {
-        return userService.getAllPreferenceSettings();
+        return userService.getUserPreferencesConfig();
     }
 
 }
