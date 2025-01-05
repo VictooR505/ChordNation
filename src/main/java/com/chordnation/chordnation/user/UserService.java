@@ -138,14 +138,24 @@ public class UserService {
         String totalTime = formatTime(userDetails.getTotalSessionTime());
         String averageTime = formatTime(userDetails.getAverageSessionTime());
 
+        int userCurrentLevelPoints = userDetails.getPoints() - userDetails.getLevel().getMinPoints();
+        Level previousUserLevel = userDetails.getLevel().getPreviousLevel();
+        int userPointsToNextRank = userDetails.getLevel().getMaxPoints() - previousUserLevel.getMaxPoints();
+
+        // When max level reached
+        if (userDetails.getLevel() == Level.MASTER) {
+            userCurrentLevelPoints = Level.MASTER.getMinPoints();
+            userPointsToNextRank = userCurrentLevelPoints;
+        }
+
         return new StatisticsDTO(
                 userDetails.getLevel(),
-                userDetails.getPoints(),
+                userCurrentLevelPoints,
                 totalTime,
                 averageTime,
                 lastExercise,
                 lastSong,
-                userDetails.getLevel().getMaxPoints()
+                userPointsToNextRank
         );
     }
 
