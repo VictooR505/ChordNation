@@ -4,6 +4,7 @@ import com.chordnation.chordnation.exercise.Exercise;
 import com.chordnation.chordnation.tab.SongDTO;
 import com.chordnation.chordnation.user.dto.FavoritesDTO;
 import com.chordnation.chordnation.user.dto.StatisticsDTO;
+import com.chordnation.chordnation.user.dto.UserPreferencesConfigDTO;
 import com.chordnation.chordnation.user.dto.UserPreferencesDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,7 +75,7 @@ public class UserController {
     }
 
     @GetMapping("/preferenceSettings")
-    public UserPreferencesDTO getAllPreferenceSettings() {
+    public UserPreferencesConfigDTO getAllPreferenceSettings() {
         return userService.getAllPreferenceSettings();
     }
 

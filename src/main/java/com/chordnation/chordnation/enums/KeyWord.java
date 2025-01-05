@@ -1,49 +1,59 @@
 package com.chordnation.chordnation.enums;
 
 public enum KeyWord {
-   // Rodzaj ćwiczenia
-    CHORD_PRACTICE,
-    SCALE_PRACTICE,
-    FINGERSTYLE,
-    STRUMMING,
-    PICKING,
-    ARPEGGIO,
-    SLIDING,
-    HAMMER_ON,
-    PULL_OFF,
-    BENDING,
-    TAPPING,
+    // Rodzaj ćwiczenia
+    CHORD_PRACTICE("Nauka akordów"),
+    SCALE_PRACTICE("Ćwiczenie skali"),
+    FINGERSTYLE("Fingerstyle"),
+    STRUMMING("Uderzanie akordów"),
+    PICKING("Picking"),
+    ARPEGGIO("Arpeggio"),
+    SLIDING("Sliding"),
+    HAMMER_ON("Hammer-on"),
+    PULL_OFF("Pull-off"),
+    BENDING("Bending"),
+    TAPPING("Tapping"),
 
-   // Tempo
-    SLOW,
-    MEDIUM,
-    FAST,
+    // Tempo
+    SLOW("Wolne tempo"),
+    MEDIUM("Średnie tempo"),
+    FAST("Szybkie tempo"),
 
- //   Typ utworu
-    SOLO,
-    DUET,
-    BAND,
+    // Typ utworu
+    SOLO("Solo"),
+    DUET("Duet"),
+    BAND("Zespół"),
 
-  //  Techniki
-    LEGATO,
-    STACCATO,
-    VIBRATO,
-    PALM_MUTING,
-    HARMONICS,
-    SWEEP_PICKING,
+    // Techniki
+    LEGATO("Legato"),
+    STACCATO("Staccato"),
+    VIBRATO("Vibrato"),
+    PALM_MUTING("Palm muting"),
+    HARMONICS("Harmoniki"),
+    SWEEP_PICKING("Sweep picking"),
 
-   // Sprzęt
-    ACOUSTIC,
-    ELECTRIC,
-    BASS,
+    // Sprzęt
+    ACOUSTIC("Akustyczna"),
+    ELECTRIC("Elektryczna"),
+    BASS("Basowa"),
 
-  //  Specjalne
-    IMPROVISATION,
-    EAR_TRAINING,
-    MUSIC_THEORY,
-    RHYTHM,
-    MELODY,
-    TAB_READING,
-    SIGHT_READING,
-    SONGWRITING
+    // Specjalne
+    IMPROVISATION("Improwizacja"),
+    EAR_TRAINING("Trening słuchowy"),
+    MUSIC_THEORY("Teoria muzyki"),
+    RHYTHM("Rytm"),
+    MELODY("Melodia"),
+    TAB_READING("Czytanie tabulatur"),
+    SIGHT_READING("Czytanie nut"),
+    SONGWRITING("Pisanie utworów");
+
+    private final String description;
+
+    KeyWord(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }
