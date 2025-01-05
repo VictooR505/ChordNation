@@ -74,14 +74,14 @@ public class ExerciseService {
         List<ExercisesDone> exercisesDone = userDetails.getExercisesDone();
         ExercisesDone exercise = new ExercisesDone(exerciseId, LocalDateTime.now(), Level.values()[level]);
 
-        Optional<Level> maxLevel = exercisesDone.stream()
+        Level maxLevel = exercisesDone.stream()
                                        .filter(e -> e.getExerciseId().equals(exerciseId))
                                        .max(Comparator.comparing(ExercisesDone::getLevel))
-                                       .map(ExercisesDone::getLevel);
+                                       .map(ExercisesDone::getLevel).orElse(Level.NO_RANK);
 
-        if (maxLevel.isEmpty() || maxLevel.get().ordinal() < level) {
-            level = level - maxLevel.get().ordinal();
-            addPoints(userId, exerciseId, level);
+        if (maxLevel.ordinal() < level) {
+            int addedLevels = level - maxLevel.ordinal();
+            addPoints(userId, exerciseId, addedLevels);
         }
 
         exercisesDone.add(exercise);
@@ -90,10 +90,10 @@ public class ExerciseService {
         return level;
     }
 
-    public void addPoints(Long userId, Long exerciseId, int level){
+    public void addPoints(Long userId, Long exerciseId, int addedLevels){
         Exercise exercise = exerciseRepository.findById(exerciseId).get();
         User user = userRepository.findById(userId).get();
-        user.getUserDetails().setPoints(user.getUserDetails().getPoints()+exercise.getPoints()*(level+1));
+        user.getUserDetails().setPoints(user.getUserDetails().getPoints()+exercise.getPoints()*addedLevels);
         userRepository.save(user);
         if(user.getUserDetails().getLevel()!=Level.MASTER){
             calculateLevel(userId); //nie ma sensu sprawdzac przy maks poziomie

@@ -32,8 +32,8 @@ insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_n
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (15, 2, 1, 1, 0, 0, 0, 0, 'https://example.com/tab1');
 
 -- MOCK USERS
-insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time) values (1, 'test@onet.pl', 'test 123', 'pass', 0, false, 1, 0, 700, 0);
-insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time) values (2, 'test2@onet.pl', 'test 124', 'pass', 0, false, 1, 0, 100, 0);
+insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time, exercise_played_to_session_time) values (1, 'test@onet.pl', 'test 123', 'pass', 0, false, 1, 1, 0, 0, 0);
+insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time, exercise_played_to_session_time) values (2, 'test2@onet.pl', 'test 124', 'pass', 0, false, 1, 1, 0, 0, 0);
 
 -- SECTIONS
 insert into section (id, name, description) values (1, 'Sekcja 1: Wprowadzenie do Gry na Gitarze', 'Ta sekcja wprowadza podstawowe pojęcia związane z grą na gitarze, w tym podstawowe akordy i strojenie.');
@@ -44,22 +44,22 @@ insert into section (id, name, description) values (5, 'Sekcja 5: Zaawansowane T
 
 -- EXERCISES
 ---- BEGINNER
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (1, 0, 'Podstawowe akordy', 'Ćwiczenie 1.1: Podstawowe akordy', 'https://song1', 20, 0, '', 1);
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (2, 0, 'Strojenie gitary', 'Ćwiczenie 1.2: Strojenie gitary', 'https://song2', 20, 0, '', 1);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (1, 1, 'Podstawowe akordy', 'Ćwiczenie 1.1: Podstawowe akordy', 'https://song1', 200, 0, '', 1);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (2, 1, 'Strojenie gitary', 'Ćwiczenie 1.2: Strojenie gitary', 'https://song2', 200, 0, '', 1);
 
 ---- INTERMEDIATE
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (3, 1, 'Użycie kostki', 'Ćwiczenie 2.1: Użycie kostki', 'https://song3', 25, 40, '', 2);
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (4, 1, 'Palcowanie', 'Ćwiczenie 2.2: Palcowanie', 'https://song4', 25, 40, '', 2);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (3, 2, 'Użycie kostki', 'Ćwiczenie 2.1: Użycie kostki', 'https://song3', 200, 40, '', 2);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (4, 2, 'Palcowanie', 'Ćwiczenie 2.2: Palcowanie', 'https://song4', 200, 40, '', 2);
 
 ---- ADVANCED
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (5, 2, 'Skale pentatoniczne', 'Ćwiczenie 3.1: Skale pentatoniczne', 'https://song5', 30, 80, '', 3);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (5, 3, 'Skale pentatoniczne', 'Ćwiczenie 3.1: Skale pentatoniczne', 'https://song5', 200, 80, '', 3);
 
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (6, 2, 'Improwizacja na podstawie skal', 'Ćwiczenie 3.2: Improwizacja na podstawie skal', 'https://song6', 30, 80, '', 3);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (6, 3, 'Improwizacja na podstawie skal', 'Ćwiczenie 3.2: Improwizacja na podstawie skal', 'https://song6', 200, 80, '', 3);
 
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (7, 2, 'Przejścia między akordami', 'Ćwiczenie 4.1: Przejścia między akordami', 'https://song7', 25, 120, '', 4);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (7, 3, 'Przejścia między akordami', 'Ćwiczenie 4.1: Przejścia między akordami', 'https://song7', 300, 120, '', 4);
 
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (8, 2, 'Granie prostych riffów', 'Ćwiczenie 4.2: Granie prostych riffów', 'https://song8', 25, 120, '', 4);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (8, 3, 'Granie prostych riffów', 'Ćwiczenie 4.2: Granie prostych riffów', 'https://song8', 300, 120, '', 4);
 
 ---- MASTER
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (9, 3, 'Bend i Vibrato', 'Ćwiczenie 5.1: Bend i Vibrato', 'https://song9', 35, 160, '', 5);
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (10, 3, 'Slide i Hammer-on/Pull-off', 'Ćwiczenie 5.2: Slide i Hammer-on/Pull-off', 'https://song10', 35, 160, '', 5);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (9, 4, 'Bend i Vibrato', 'Ćwiczenie 5.1: Bend i Vibrato', 'https://song9', 300, 160, '', 5);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (10, 4, 'Slide i Hammer-on/Pull-off', 'Ćwiczenie 5.2: Slide i Hammer-on/Pull-off', 'https://song10', 35, 160, '', 5);
