@@ -56,7 +56,7 @@ public class AuthenticationController {
 
         final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
-        return new AuthenticationResponse(jwt, firstLogin);
+        return new AuthenticationResponse(jwt, firstLogin, user.getName(), user.getEmail(), user.getId());
 
     }
 
