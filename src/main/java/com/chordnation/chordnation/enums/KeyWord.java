@@ -16,6 +16,7 @@ public enum KeyWord {
     PULL_OFF("Pull-off", "Rodzaj ćwiczenia"),
     BENDING("Bending", "Rodzaj ćwiczenia"),
     TAPPING("Tapping", "Rodzaj ćwiczenia"),
+    RIFF_PLAYING("Granie riffów", "Rodzaj ćwiczenia"),
 
     // Tempo
     SLOW("Wolne tempo", "Tempo"),
@@ -48,7 +49,8 @@ public enum KeyWord {
     MELODY("Melodia", "Specjalne"),
     TAB_READING("Czytanie tabulatur", "Specjalne"),
     SIGHT_READING("Czytanie nut", "Specjalne"),
-    SONGWRITING("Pisanie utworów", "Specjalne");
+    SONGWRITING("Pisanie utworów", "Specjalne"),
+    TUNING("Strojenie gitary", "Specjalne");
 
     private final String description;
     private final String group;

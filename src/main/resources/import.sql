@@ -62,3 +62,17 @@ insert into exercise (id, level, name, description, audio_url, points, required_
 ---- MASTER
 insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (9, 4, 'Bend i Vibrato', 'Ćwiczenie 5.1: Bend i Vibrato', 'https://song9', 300, 160, '', 5);
 insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (10, 4, 'Slide i Hammer-on/Pull-off', 'Ćwiczenie 5.2: Slide i Hammer-on/Pull-off', 'https://song10', 35, 160, '', 5);
+
+insert into exercise_key_words (exercise_id, key_words) values (1, 'CHORD_PRACTICE');
+insert into exercise_key_words (exercise_id, key_words) values (2, 'TUNING');
+insert into exercise_key_words (exercise_id, key_words) values (3, 'PICKING');
+insert into exercise_key_words (exercise_id, key_words) values (4, 'FINGERSTYLE');
+insert into exercise_key_words (exercise_id, key_words) values (5, 'SCALE_PRACTICE');
+insert into exercise_key_words (exercise_id, key_words) values (6, 'IMPROVISATION');
+insert into exercise_key_words (exercise_id, key_words) values (7, 'CHORD_PRACTICE');
+insert into exercise_key_words (exercise_id, key_words) values (8, 'RIFF_PLAYING');
+insert into exercise_key_words (exercise_id, key_words) values (9, 'BENDING');
+insert into exercise_key_words (exercise_id, key_words) values (9, 'VIBRATO');
+insert into exercise_key_words (exercise_id, key_words) values (10, 'SLIDING');
+insert into exercise_key_words (exercise_id, key_words) values (10, 'HAMMER_ON');
+insert into exercise_key_words (exercise_id, key_words) values (10, 'PULL_OFF');
