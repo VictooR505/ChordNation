@@ -28,16 +28,16 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.cors().and().csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/**").permitAll()
-                .and()
-                .authorizeHttpRequests().requestMatchers("/**")
-                .authenticated().and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                   .authorizeHttpRequests()
+                   .requestMatchers("/authenticate", "/sign-up").permitAll()
+                   .and()
+                   .authorizeHttpRequests().requestMatchers("/**")
+                   .authenticated().and()
+                   .sessionManagement()
+                   .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                   .and()
+                   .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)
+                   .build();
     }
 
     @Bean
