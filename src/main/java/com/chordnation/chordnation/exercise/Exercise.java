@@ -22,6 +22,7 @@ public class Exercise {
     private int points;
     private int requiredPoints;
     @ElementCollection
+    @Enumerated(EnumType.STRING)
     private List<KeyWord> keyWords;
     //5 sekcji + 5/6 cw na kazda sekcji
 

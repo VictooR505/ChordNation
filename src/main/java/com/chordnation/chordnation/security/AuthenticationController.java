@@ -36,7 +36,8 @@ public class AuthenticationController {
     private UserDetailsServiceImpl userDetailsService;
 
     @PostMapping("/authenticate")
-    public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationDTO authenticationDTO, HttpServletResponse response) throws BadCredentialsException, DisabledException, UsernameNotFoundException, IOException {
+    public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationDTO authenticationDTO, HttpServletResponse response)
+        throws BadCredentialsException, DisabledException, UsernameNotFoundException, IOException {
         User user = userRepository.findByEmail(authenticationDTO.email());
         boolean firstLogin = user.getUserDetails().isFirstLogin();
         try {
@@ -56,7 +57,7 @@ public class AuthenticationController {
 
         final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
-        return new AuthenticationResponse(jwt, firstLogin);
+        return new AuthenticationResponse(jwt, firstLogin, user.getName(), user.getEmail(), user.getId());
 
     }
 

@@ -1,6 +1,8 @@
 package com.chordnation.chordnation.security;
 
+import com.chordnation.chordnation.enums.Level;
 import com.chordnation.chordnation.user.User;
+import com.chordnation.chordnation.user.UserDetails;
 import com.chordnation.chordnation.user.UserRepository;
 import com.chordnation.chordnation.user.dto.SignupDTO;
 import com.chordnation.chordnation.user.dto.UserDTO;
@@ -16,9 +18,15 @@ public class AuthService {
 
     public UserDTO createUser(SignupDTO signupDTO) {
         User user = new User();
+        Level startingLevel = signupDTO.level();
         user.setName(signupDTO.name());
         user.setEmail(signupDTO.email());
-        user.getUserDetails().setLevel(signupDTO.level());
+
+        UserDetails newUserDetails = new UserDetails();
+        newUserDetails.setLevel(startingLevel);
+        newUserDetails.setPoints(startingLevel.getMinPoints());
+        user.setUserDetails(newUserDetails);
+
         user.setPassword(new BCryptPasswordEncoder().encode(signupDTO.password()));
         User createdUser = userRepository.save(user);
         return new UserDTO(

@@ -32,8 +32,7 @@ insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_n
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (15, 2, 1, 1, 0, 0, 0, 0, 'https://example.com/tab1');
 
 -- MOCK USERS
-insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time, exercise_played_to_session_time) values (1, 'test@onet.pl', 'test 123', 'pass', 0, false, 1, 1, 0, 0, 0);
-insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time, exercise_played_to_session_time) values (2, 'test2@onet.pl', 'test 124', 'pass', 0, false, 1, 1, 0, 0, 0);
+insert into users (id, email, name, password, average_session_time, first_login, guitar_type, level, points, total_session_time, exercise_played_to_session_time) values (0, 'test@onet.pl', 'test', 'test', 0, false, 1, 1, 0, 0, 0);
 
 -- SECTIONS
 insert into section (id, name, description) values (1, 'Sekcja 1: Wprowadzenie do Gry na Gitarze', 'Ta sekcja wprowadza podstawowe pojęcia związane z grą na gitarze, w tym podstawowe akordy i strojenie.');
@@ -63,3 +62,17 @@ insert into exercise (id, level, name, description, audio_url, points, required_
 ---- MASTER
 insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (9, 4, 'Bend i Vibrato', 'Ćwiczenie 5.1: Bend i Vibrato', 'https://song9', 300, 160, '', 5);
 insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (10, 4, 'Slide i Hammer-on/Pull-off', 'Ćwiczenie 5.2: Slide i Hammer-on/Pull-off', 'https://song10', 35, 160, '', 5);
+
+insert into exercise_key_words (exercise_id, key_words) values (1, 'CHORD_PRACTICE');
+insert into exercise_key_words (exercise_id, key_words) values (2, 'TUNING');
+insert into exercise_key_words (exercise_id, key_words) values (3, 'PICKING');
+insert into exercise_key_words (exercise_id, key_words) values (4, 'FINGERSTYLE');
+insert into exercise_key_words (exercise_id, key_words) values (5, 'SCALE_PRACTICE');
+insert into exercise_key_words (exercise_id, key_words) values (6, 'IMPROVISATION');
+insert into exercise_key_words (exercise_id, key_words) values (7, 'CHORD_PRACTICE');
+insert into exercise_key_words (exercise_id, key_words) values (8, 'RIFF_PLAYING');
+insert into exercise_key_words (exercise_id, key_words) values (9, 'BENDING');
+insert into exercise_key_words (exercise_id, key_words) values (9, 'VIBRATO');
+insert into exercise_key_words (exercise_id, key_words) values (10, 'SLIDING');
+insert into exercise_key_words (exercise_id, key_words) values (10, 'HAMMER_ON');
+insert into exercise_key_words (exercise_id, key_words) values (10, 'PULL_OFF');
