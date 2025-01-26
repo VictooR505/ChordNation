@@ -99,7 +99,7 @@ public class UserService {
 
         List<Exercise> allExercises = exerciseRepository.findAllByRequiredPointsIsLessThan(user.getUserDetails().getPoints());
 
-        return allExercises.stream()
+        allExercises = allExercises.stream()
                 .sorted(Comparator.comparing(Exercise::getRequiredPoints)
                         .thenComparing((Exercise e) -> {
                             ExercisesDone done = user.getUserDetails().getExercisesDone().stream()
@@ -120,6 +120,10 @@ public class UserService {
                 )
                 .limit(5)
                 .collect(Collectors.toList());
+        if (allExercises.isEmpty()){
+            allExercises = exerciseRepository.findAllByRequiredPointsIsLessThan(user.getUserDetails().getPoints()).stream().limit(3).toList();
+        }
+        return allExercises;
     }
 
     public StatisticsDTO getStatistics(Long id){

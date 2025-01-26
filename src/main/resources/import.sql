@@ -15,11 +15,11 @@ insert into song (name, artist, genre, id, image_url) values ('The Valley Runs L
 insert into song (name, artist, genre, id, image_url) values ('Take Me Home, Country Roads', 'John Denver', 'COUNTRY', 14, 'https://lastfm.freetls.fastly.net/i/u/300x300/10da75dda1c1df4357280824d800f3b9.jpg');
 
 -- TABS
-insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (1, 1, 1, 1, 0, 0, 0, 0, 'https://example.com/tab1');
-insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (2, 2, 3, 1, 0, 0, 0, 0, 'https://example.com/tab1');
-insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (3, 3, 3, 1, 0, 0, 0, 0, 'https://example.com/tab1');
-insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (4, 4, 1, 1, 0, 0, 0, 0, 'https://example.com/tab1');
-insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (5, 5, 2, 1, 0, 0, 0, 0, 'https://example.com/tab1');
+insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (1, 1, 1, 0, 0, 0, 0, 0, 'https://drive.google.com/file/d/129ponsNGK3sDOZvWW48CMrrNvn8afkc9/view?usp=drive_link');
+insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (2, 2, 3, 1, 0, 3, 0, 0, 'https://drive.google.com/file/d/1HS3Q3JiXpnh_Dvpsiq94EivMpd5aCWDZ/view?usp=drive_link');
+insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (3, 3, 3, 1, 0, 0, 0, 0, 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link');
+insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (4, 4, 1, 1, 0, 0, 0, 0, 'https://drive.google.com/file/d/1E1kbTanD8k3bKN-Ig3TW94wbKkoxHbIZ/view?usp=drive_link');
+insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (5, 5, 2, 1, 0, 0, 0, 0, 'https://drive.google.com/file/d/19YzVvoFH5ZF-nsvG_UhHcZzcRgORn2TE/view?usp=drive_link');
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (6, 6, 3, 1, 0, 0, 0, 0, 'https://example.com/tab1');
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (7, 7, 0, 1, 0, 0, 0, 0, 'https://example.com/tab1');
 insert into tab (id, song_id, level, tab_type, guitar_type, tuning, rate, rate_number, url) values (8, 8, 1, 1, 0, 0, 0, 0, 'https://example.com/tab1');
@@ -43,25 +43,25 @@ insert into section (id, name, description) values (5, 'Sekcja 5: Zaawansowane T
 
 -- EXERCISES
 ---- BEGINNER
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (1, 1, 'Podstawowe akordy', 'Ćwiczenie 1.1: Podstawowe akordy', 'https://song1', 200, 0, '', 1);
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (2, 1, 'Strojenie gitary', 'Ćwiczenie 1.2: Strojenie gitary', 'https://song2', 200, 0, '', 1);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (1, 1, 'Podstawowe akordy', 'Ćwiczenie 1.1: Podstawowe akordy', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 200, 0, '', 1);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (2, 1, 'Strojenie gitary', 'Ćwiczenie 1.2: Strojenie gitary', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 200, 0, '', 1);
 
 ---- INTERMEDIATE
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (3, 2, 'Użycie kostki', 'Ćwiczenie 2.1: Użycie kostki', 'https://song3', 200, 40, '', 2);
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (4, 2, 'Palcowanie', 'Ćwiczenie 2.2: Palcowanie', 'https://song4', 200, 40, '', 2);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (3, 2, 'Użycie kostki', 'Ćwiczenie 2.1: Użycie kostki', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 200, 40, '', 2);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (4, 2, 'Palcowanie', 'Ćwiczenie 2.2: Palcowanie', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 200, 40, '', 2);
 
 ---- ADVANCED
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (5, 3, 'Skale pentatoniczne', 'Ćwiczenie 3.1: Skale pentatoniczne', 'https://song5', 200, 80, '', 3);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (5, 3, 'Skale pentatoniczne', 'Ćwiczenie 3.1: Skale pentatoniczne', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 200, 80, '', 3);
 
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (6, 3, 'Improwizacja na podstawie skal', 'Ćwiczenie 3.2: Improwizacja na podstawie skal', 'https://song6', 200, 80, '', 3);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (6, 3, 'Improwizacja na podstawie skal', 'Ćwiczenie 3.2: Improwizacja na podstawie skal', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 200, 80, '', 3);
 
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (7, 3, 'Przejścia między akordami', 'Ćwiczenie 4.1: Przejścia między akordami', 'https://song7', 300, 120, '', 4);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (7, 3, 'Przejścia między akordami', 'Ćwiczenie 4.1: Przejścia między akordami', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 300, 120, '', 4);
 
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (8, 3, 'Granie prostych riffów', 'Ćwiczenie 4.2: Granie prostych riffów', 'https://song8', 300, 120, '', 4);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (8, 3, 'Granie prostych riffów', 'Ćwiczenie 4.2: Granie prostych riffów', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 300, 120, '', 4);
 
 ---- MASTER
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (9, 4, 'Bend i Vibrato', 'Ćwiczenie 5.1: Bend i Vibrato', 'https://song9', 300, 160, '', 5);
-insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (10, 4, 'Slide i Hammer-on/Pull-off', 'Ćwiczenie 5.2: Slide i Hammer-on/Pull-off', 'https://song10', 35, 160, '', 5);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (9, 4, 'Bend i Vibrato', 'Ćwiczenie 5.1: Bend i Vibrato', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 300, 160, '', 5);
+insert into exercise (id, level, name, description, audio_url, points, required_points, approx_duration, section_id) values (10, 4, 'Slide i Hammer-on/Pull-off', 'Ćwiczenie 5.2: Slide i Hammer-on/Pull-off', 'https://drive.google.com/file/d/1SBa8J-fB_ISWFdNCd8FvJv86SPITsfyD/view?usp=drive_link', 35, 160, '', 5);
 
 insert into exercise_key_words (exercise_id, key_words) values (1, 'CHORD_PRACTICE');
 insert into exercise_key_words (exercise_id, key_words) values (2, 'TUNING');

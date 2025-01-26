@@ -16,7 +16,7 @@ public class Song {
     private String artist;
     private String name;
     @Enumerated(EnumType.STRING)
-    private Genre genre; //zamien na enumy
+    private Genre genre;
     private String imageUrl;
 
 
