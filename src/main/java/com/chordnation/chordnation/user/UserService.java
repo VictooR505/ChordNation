@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +27,7 @@ public class UserService {
     private final TabRepository tabRepository;
     private final ExerciseRepository exerciseRepository;
     private final SongRepository songRepository;
+    Logger logger = Logger.getLogger(getClass().getName());
 
     public UserService(UserRepository userRepository, TabRepository tabRepository, ExerciseRepository exerciseRepository, SongRepository songRepository) {
         this.userRepository = userRepository;
@@ -97,18 +100,28 @@ public class UserService {
         Level userLevel = user.getUserDetails().getLevel();
         Set<KeyWord> userKeywords = new HashSet<>(user.getUserDetails().getKeyWords());
 
-        List<Exercise> allExercises = exerciseRepository.findAllByRequiredPointsIsLessThan(user.getUserDetails().getPoints());
+        List<Exercise> allExercises = exerciseRepository.findByRequiredPointsLessThanEqual(user.getUserDetails().getPoints());
 
         allExercises = allExercises.stream()
+                .filter(e -> {
+                    Optional<ExercisesDone> doneOpt = user.getUserDetails().getExercisesDone().stream()
+                            .filter(ed -> ed.getExerciseId().equals(e.getId()))
+                            .findFirst();
+                    if (doneOpt.isEmpty()) {
+                        return true;
+                    }
+                    ExercisesDone done = doneOpt.get();
+                    return done.getLevel() != Level.MASTER;
+                })
                 .sorted(Comparator.comparing(Exercise::getRequiredPoints)
                         .thenComparing((Exercise e) -> {
-                            ExercisesDone done = user.getUserDetails().getExercisesDone().stream()
+                            Optional<ExercisesDone> doneOpt = user.getUserDetails().getExercisesDone().stream()
                                     .filter(ed -> ed.getExerciseId().equals(e.getId()))
-                                    .findFirst()
-                                    .orElse(null);
-                            if (done == null) {
+                                    .findFirst();
+                            if (doneOpt.isEmpty()) {
                                 return 0;
                             }
+                            ExercisesDone done = doneOpt.get();
                             return done.getLevel().ordinal() < userLevel.ordinal() ? -1 : 1;
                         })
                         .thenComparing((Exercise e) -> {
@@ -119,10 +132,7 @@ public class UserService {
                         })
                 )
                 .limit(5)
-                .collect(Collectors.toList());
-        if (allExercises.isEmpty()){
-            allExercises = exerciseRepository.findAllByRequiredPointsIsLessThan(user.getUserDetails().getPoints()).stream().limit(3).toList();
-        }
+                .toList();
         return allExercises;
     }
 

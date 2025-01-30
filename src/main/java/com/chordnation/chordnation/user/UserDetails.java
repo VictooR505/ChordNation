@@ -4,6 +4,7 @@ import com.chordnation.chordnation.enums.Genre;
 import com.chordnation.chordnation.enums.GuitarType;
 import com.chordnation.chordnation.enums.KeyWord;
 import com.chordnation.chordnation.enums.Level;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 
@@ -31,7 +32,7 @@ public class UserDetails {
     private List<KeyWord> keyWords;
     @ElementCollection
     private Map<Long, Integer> ratedTabs;
-    private boolean firstLogin;
+    private boolean firstLogin = true;
     private long averageSessionTime;
     private long totalSessionTime;
     private int exercisePlayedToSessionTime;

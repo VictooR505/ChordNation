@@ -20,7 +20,7 @@ public interface TabRepository extends JpaRepository<Tab, Long> {
     @Query("SELECT t FROM Tab t JOIN t.song s WHERE (s.genre IN (:genres)) AND (t.level IN (:levels)) AND (t.guitarType IN (:guitarTypes))")
     List<Tab> findAll(List<Genre> genres, List<Level> levels, List<GuitarType> guitarTypes, Sort by);
 
-    @Query("SELECT t FROM Tab t JOIN t.song s WHERE (s.genre IN (:genres)) AND (t.level IN (:levels)) AND (s.artist IN (:artists)) AND (t.keyWords IN (:keyWords))")
+    @Query("SELECT t FROM Tab t JOIN t.song s WHERE (s.genre IN (:genres)) AND (t.level IN (:levels)) OR (s.artist IN (:artists)) OR (t.keyWords IN (:keyWords))")
     List<Tab> findAllSuggested(List<Genre> genres, List<Level> levels, List<String> artists, List<KeyWord> keyWords);
 
     @Query("SELECT t FROM Tab t JOIN t.song s WHERE (s.genre IN (:genres)) AND (t.level IN (:levels)) " +
